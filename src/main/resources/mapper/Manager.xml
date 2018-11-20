@@ -9,7 +9,7 @@
         <result column="pass" property="pass"/>
     </resultMap>
 
-    <select id="getManager" parameterType="String" resultType="managerMap">
+    <select id="getManager" parameterType="String" resultMap="managerMap">
         select * from manager WHERE mid = #{mid}
     </select>
 </mapper>
