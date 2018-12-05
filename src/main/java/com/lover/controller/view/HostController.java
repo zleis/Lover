@@ -2,8 +2,10 @@ package com.lover.controller.view;
 
 import com.lover.dao.MainDao;
 import com.lover.entity.Main;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.apache.log4j.Logger;
@@ -26,11 +28,15 @@ public class HostController{
     private MainDao mainDao;
 
     @RequestMapping("/index")
-    public ModelAndView index(HttpServletRequest request, HttpServletResponse response){
+    public ModelAndView index(HttpServletRequest request){
         logger.info("/index");
+        ModelAndView mv = new ModelAndView( "host/index");
 
-        ModelAndView mv = new ModelAndView("host/index");
-//        List<Main> mains = mainDao.getMainList();
+        List<Main> mains = mainDao.getMainList();
+
+        logger.info(mains.toString());
+        mv.addObject("contentList", mains);
+        mv.addObject("test", 1);
         return mv;
     }
 

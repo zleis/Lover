@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface MainDao {
 
-//    List<Main> getMainList();
+    List<Main> getMainList();
 }
