@@ -6,9 +6,11 @@ import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.apache.log4j.Logger;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,10 +35,23 @@ public class HostController{
         ModelAndView mv = new ModelAndView( "host/index");
 
         List<Main> mains = mainDao.getMainList();
+        for(Main main: mains){
+            logger.info(main.toString());
+        }
 
-        logger.info(mains.toString());
-        mv.addObject("contentList", mains);
+        mv.addObject("message", mains);
         mv.addObject("test", 1);
+        mv.getModel().put("key", mains);
+        mv.getModel().put("key1", 1);
+        return mv;
+    }
+
+    @RequestMapping("/list_pic")
+    public ModelAndView list_pic(HttpServletRequest request){
+        logger.info("/list_pic");
+        ModelAndView mv = new ModelAndView("host/list_pic");
+
+
         return mv;
     }
 
