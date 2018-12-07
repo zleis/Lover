@@ -48,13 +48,11 @@
                 <div class="hot_content">
                     <div class="hot_content_box">
                         <div class="hot_content_box_title">
-                            <img src="/image/hot_list_ico.png"></img>警务快讯
+                            <img src="/image/hot_list_ico.png"></img>回忆录类别
                         </div>
                         <div class="hot_content_box_content">
-                            <ul>
-                                <li><a href="#">局内要闻</a></li>
-                                <li><a href="#">会议活动</a></li>
-                                <li><a href="#">领导讲话</a></li>
+                            <ul th:each ="item : ${mtype}">
+                                <li><a href="#" th:text="${item.name}"></a></li>
                             </ul>
                         </div>
                     </div>

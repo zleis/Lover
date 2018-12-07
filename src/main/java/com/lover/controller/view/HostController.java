@@ -1,7 +1,9 @@
 package com.lover.controller.view;
 
+import com.lover.dao.MTypeDao;
 import com.lover.dao.MainDao;
 import com.lover.dao.MenuDao;
+import com.lover.entity.MType;
 import com.lover.entity.Main;
 import com.lover.entity.Menu;
 import com.sun.org.apache.xpath.internal.operations.Mod;
@@ -34,6 +36,9 @@ public class HostController{
     @Autowired
     private MenuDao menuDao;
 
+    @Autowired
+    private MTypeDao mTypeDao;
+
     @RequestMapping("/index")
     public ModelAndView index(HttpServletRequest request){
         logger.info("/index");
@@ -55,7 +60,9 @@ public class HostController{
         logger.info("/memoirs");
         ModelAndView mv = new ModelAndView("host/memoirs");
         List<Menu> menus = menuDao.getMenuList();
+        List<MType> mTypes = mTypeDao.getMTypeList();
         mv.addObject("menu", menus);
+        mv.addObject("mtype", mTypes);
         return mv;
     }
 
