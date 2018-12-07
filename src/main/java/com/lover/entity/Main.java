@@ -35,4 +35,13 @@ public class Main {
     public void setClassName(String className) {
         this.className = className;
     }
+
+    @Override
+    public String toString() {
+        return "Main{" +
+                "id=" + id +
+                ", conent='" + conent + '\'' +
+                ", className='" + className + '\'' +
+                '}';
+    }
 }

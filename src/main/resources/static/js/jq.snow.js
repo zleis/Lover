@@ -1,8 +1,3 @@
-/**
- * js网页雪花效果jquery插件 
- * 懒人建站 www.51xuediannao.com   整理
- * @see http://workshop.rs
- */
 (function($){
 	
 	$.fn.snow = function(options){

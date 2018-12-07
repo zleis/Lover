@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"></meta>
+    <meta name="renderer" content="webkit"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <title>Title</title>
+
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
+    <link href="/css/base.css" rel="stylesheet" type="text/css"></link>
+    <link href="/css/list_wz.css" rel="stylesheet" type="text/css"></link>
+
+    <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="main">
+    <div class="main_box">
+
+        <div class="logo"></div>
+        <!-- logo 结束 -->
+
+        <!-- banner 开始 -->
+        <div class="banner">
+            <ul>
+                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'"><a th:href="${item.link}" th:text="${item.name}"></a> </li>
+                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" ><a th:href="${item.link}" th:text="${item.name}"></a></li>
+            </ul>
+        </div>
+
+        <div class="address">
+            <img src="img/address_ico.png"></img>
+            <a href="index">首页</a>
+            <a>：</a>
+            <a href="#">回忆录</a>
+            <a>&gt;</a>
+        </div>
+        <!-- address 结束 -->
+
+        <!-- list_main 开始 -->
+        <div class="list_main">
+            <!-- hot 开始 -->
+            <div class="hot">
+                <div class="hot_content">
+                    <div class="hot_content_box">
+                        <div class="hot_content_box_title">
+                            <img src="/image/hot_list_ico.png"></img>警务快讯
+                        </div>
+                        <div class="hot_content_box_content">
+                            <ul>
+                                <li><a href="#">局内要闻</a></li>
+                                <li><a href="#">会议活动</a></li>
+                                <li><a href="#">领导讲话</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list_pic_con">
+                <div class="list_pic_con_title">
+                    <font>回忆录列表</font>
+                </div>
+                <div class="list_pic_con_content">
+                    <ul>
+                        <li>
+                            <img src="/image/list_wz/pic_list_PIC1.png"></img>
+                            <p class="title"><a href="content.html">五年后我市力争成为制造业强市</a></p>
+                            <p class="time">时间：2015-06-05</p>
+                            <p class="con">除了各大网站也是进大网大网站也是牛，肉战略要地站也是口牛高端战略要地,除了各大网站也是进大网大网站也是牛肉战略要地站也是口牛高端战略要地,除了各大网站也是进大网大网站…<a href="content.html">【查看全文】</a></p>
+                        </li>
+                        <li>
+                            <img src="/image/list_wz/pic_list_PIC2.png"></img>
+                            <p class="title"><a href="content.html">上官吉庆在陕西代表团媒体开放日上回答媒体提问</a></p>
+                            <p class="time">时间：2015-06-05</p>
+                            <p class="con">除了各大网站也是进大网大网站也是牛，肉战略要地站也是口牛高端战略要地,除了各大网站也是进大网大网站也是牛肉战略要地站也是口牛高端战略要地,除了各大网站也是进大网大网站…<a href="content.html">【查看全文】</a></p>
+                        </li>
+                    </ul>
+                    <div class="page">
+                        <ul>
+                            <li class="border_3">共195条</li>
+                            <li class="border_3">共50页</li>
+                            <li class="border_3"><a href="">首页</a></li>
+                            <li class="border_3"><a href="">《</a></li>
+                            <li class="border_3 active"><a href="">1</a></li>
+                            <li class="border_3"><a href="">2</a></li>
+                            <li class="border_3"><a href="">3</a></li>
+                            <li class="border_3"><a href="">末页</a></li>
+                            <li class="border_3"><a href="">》</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom_banner">
+            <ul>
+                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'"><a th:href="${item.link}" th:text="${item.name}"></a> </li>
+                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" ><a th:href="${item.link}" th:text="${item.name}"></a></li>
+            </ul>
+        </div>
+        <div class="bottom">
+            COPYRIGHT版权所有
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
