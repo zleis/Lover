@@ -19,7 +19,8 @@ public class PType {
         this.name = name;
         this.ctime = ctime;
     }
-
+    public PType() {
+    }
     public int getPid() {
         return pid;
     }

@@ -6,18 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"></meta>
     <meta name="renderer" content="webkit"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-    <title>Title</title>
+    <title>回忆录</title>
 
     <link href="/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
     <link href="/css/base.css" rel="stylesheet" type="text/css"></link>
     <link href="/css/list_wz.css" rel="stylesheet" type="text/css"></link>
 
-    <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jq.snow.js"></script>
 </head>
 
 <body>
-
+<script>
+    $(function () {
+        $.fn.snow({
+            minSize: 5,		//雪花的最小尺寸
+            maxSize: 50, 	//雪花的最大尺寸
+            newOn: 200		//雪花出现的频率 这个数值越小雪花越多
+        });
+    });
+</script>
 <div class="main">
     <div class="main_box">
 
@@ -43,11 +51,7 @@
             <a href="#">回忆录</a>
             <a>&gt;</a>
         </div>
-        <!-- address 结束 -->
-
-        <!-- list_main 开始 -->
         <div class="list_main">
-            <!-- hot 开始 -->
             <div class="hot">
                 <div class="hot_content">
                     <div class="hot_content_box">
