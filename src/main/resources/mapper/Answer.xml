@@ -12,4 +12,12 @@
         <result column="content" property="content"/>
     </resultMap>
 
+    <select id="answerList" resultType="com.lover.entity.Answer" parameterType="java.util.HashMap">
+        select * from answer limit #{start}, #{length}
+    </select>
+
+    <select id="answerNum" resultType="Integer">
+        select count(*) from answer;
+    </select>
+
 </mapper>

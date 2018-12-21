@@ -11,7 +11,7 @@
     </resultMap>
 
     <select id="getMenuList" resultType="com.lover.entity.Menu">
-        SELECT * FROM menu
+        SELECT * FROM menu order by mid
     </select>
 
 </mapper>

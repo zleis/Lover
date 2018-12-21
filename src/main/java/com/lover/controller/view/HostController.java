@@ -4,12 +4,12 @@ import com.lover.dao.MTypeDao;
 import com.lover.dao.MainDao;
 import com.lover.dao.MenuDao;
 import com.lover.dao.PTypeDao;
-import com.lover.entity.MType;
-import com.lover.entity.Main;
-import com.lover.entity.Menu;
-import com.lover.entity.PType;
+import com.lover.entity.*;
+import com.lover.service.AnswerService;
+import com.lover.service.HostService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ZLei on 2018/12/2.
@@ -32,31 +33,50 @@ import java.util.List;
 public class HostController{
     private static Logger logger = Logger.getLogger(HostController.class);
 
+    // 页面服务
     @Autowired
-    private MainDao mainDao;
+    private HostService hostService;
 
     @Autowired
-    private MenuDao menuDao;
-
-    @Autowired
-    private MTypeDao mTypeDao;
-
-    @Autowired
-    private PTypeDao pTypeDao;
+    private AnswerService answerService;
 
     @RequestMapping("/index")
     public ModelAndView index(HttpServletRequest request){
         logger.info("/index");
         ModelAndView mv = new ModelAndView( "host/index");
 
-        List<Main> mains = mainDao.getMainList();
-        for(Main main: mains){
-            logger.info(main.toString());
+        mv.addObject("message", hostService.getMainList());
+
+        return mv;
+    }
+
+    /**
+     * @param request
+     * requestMap
+     * key          mean
+     * page    |  the number of page
+     *
+     * @return
+     */
+    @RequestMapping("/answer")
+    public ModelAndView answer(HttpServletRequest request){
+        logger.info("answer");
+        ModelAndView mv = new ModelAndView("host/answer");
+
+        Map<String, String> param = (Map<String, String>) request.getParameterMap();
+
+        int page = 0;  //
+        if(param.containsKey("page")){
+            page = Integer.valueOf(param.get("page"));
         }
 
-        mv.addObject("message", mains);
-        mv.getModel().put("key", mains);
-        mv.getModel().put("key1", 1);
+        List<Answer> answers = answerService.answerList(page);
+        int answerNumber = answerService.answerNumber();
+//        int answerPageNumber = Math.ceil((double)answerNumber/(double)Constant.ANSWER_PAGE_NUMBER);
+
+
+
+        mv.addObject("menu",hostService.getMenuList());
         return mv;
     }
 
@@ -64,21 +84,43 @@ public class HostController{
     public ModelAndView memoirs(HttpServletRequest request){
         logger.info("/memoirs");
         ModelAndView mv = new ModelAndView("host/memoirs");
-        List<Menu> menus = menuDao.getMenuList();
-        List<MType> mTypes = mTypeDao.getMTypeList();
-        mv.addObject("menu", menus);
-        mv.addObject("mtype", mTypes);
+
+        mv.addObject("menu", hostService.getMenuList());
+        mv.addObject("mtype", hostService.getMTypeList());
         return mv;
     }
+
 
     @RequestMapping("/gallery")
     public ModelAndView gallery(HttpServletRequest request){
         logger.info("/gallery");
         ModelAndView mv = new ModelAndView("host/gallery");
-        List<Menu> menus = menuDao.getMenuList();
-        List<PType> pTypes = pTypeDao.getPTypeList();
-        mv.addObject("menu", menus);
-        mv.addObject("ptype", pTypes);
+
+        mv.addObject("menu", hostService.getMenuList());
+        mv.addObject("ptype", hostService.getPTypeList());
+
+        return mv;
+    }
+
+    // 简答页面
+
+
+
+    // 回忆录页面
+    @RequestMapping("/memoryitem")
+    public ModelAndView memoryItem(HttpServletRequest request){
+        logger.info("/memoryItem");
+        ModelAndView mv = new ModelAndView("host/memoryItem");
+
+        return mv;
+    }
+
+    // 简答条目
+    @RequestMapping("/answeritem")
+    public ModelAndView answerItem(HttpServletRequest request){
+        logger.info("/answerItem");
+        ModelAndView mv = new ModelAndView("host/answerItem");
+
 
         return mv;
     }

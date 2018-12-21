@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"></meta>
+    <meta name="renderer" content="webkit"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <title>简答</title>
+
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
+    <link href="/css/base.css" rel="stylesheet" type="text/css"></link>
+    <link href="/css/list_wz.css" rel="stylesheet" type="text/css"></link>
+
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/jq.snow.js"></script>
+
+    <style>
+        .list_pic_con {
+            width: 990px;
+            min-height: 400px;
+            float: left;
+        }
+
+        .answerItem{
+            width: 986px;
+        }
+
+        .list_pic_con_content ul li .time, .list_pic_con_content ul li .title, .list_pic_con_content ul li .con{
+            float:left;
+            margin-left: 30px;
+            text-indent: 0em;
+
+        }
+    </style>
+</head>
+
+<body>
+<script>
+    $(function () {
+        $.fn.snow({
+            minSize: 5,		//雪花的最小尺寸
+            maxSize: 50, 	//雪花的最大尺寸
+            newOn: 200		//雪花出现的频率 这个数值越小雪花越多
+        });
+    });
+</script>
+<div class="main">
+    <div class="main_box">
+
+        <div class="logo">
+            <img src="/image/head_logo_left.png" style="float:left; left: 20px; width: 200px"></img>
+            <img src="/image/head_logo.png" style="text-align:center; width: 500px"></img>
+            <img src="/image/head_logo_right.png" style="float:right; right: 20px; width: 200px"></img>
+        </div>
+        <!-- logo 结束 -->
+
+        <!-- banner 开始 -->
+        <div class="banner">
+            <ul>
+                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'"><a th:href="${item.link}" th:text="${item.name}"></a> </li>
+                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" ><a th:href="${item.link}" th:text="${item.name}"></a></li>
+            </ul>
+        </div>
+
+        <div class="address">
+            <img src="/image/address_ico.png"></img>
+            <a href="index">首页</a>
+            <a>：</a>
+            <a href="#">简答</a>
+            <a>&gt;</a>
+        </div>
+        <div class="list_main">
+            <div class="list_pic_con">
+                <div class="list_pic_con_title">
+                    <font>简答列表</font>
+                </div>
+                <div class="list_pic_con_content">
+                    <ul>
+                        <li style="width: 986px">
+                            <img src="/image/hth.gif"></img>
+                            <p class="title"><a href="content.html">爱沛雨</a></p>
+                            <p class="time">时间：2018-10-23</p>
+                            <p class="con">简介<a href="content.html">【查看全文】</a></p>
+                        </li>
+                    </ul>
+                    <div class="page">
+                        <ul>
+                            <li class="border_3">共195条</li>
+                            <li class="border_3">共50页</li>
+                            <li class="border_3"><a href="">首页</a></li>
+                            <li class="border_3"><a href="">《</a></li>
+                            <li class="border_3 active"><a href="">1</a></li>
+                            <li class="border_3"><a href="">2</a></li>
+                            <li class="border_3"><a href="">3</a></li>
+                            <li class="border_3"><a href="">末页</a></li>
+                            <li class="border_3"><a href="">》</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom_banner">
+            <ul>
+                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'"><a th:href="${item.link}" th:text="${item.name}"></a> </li>
+                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" ><a th:href="${item.link}" th:text="${item.name}"></a></li>
+            </ul>
+        </div>
+        <div class="bottom">
+            COPYRIGHT版权所有
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

@@ -11,7 +11,7 @@
     </resultMap>
     
     <select id="getMTypeList" resultMap="mTypeMap">
-        SELECT * FROM mtype
+        SELECT * FROM mtype order by mid
     </select>
 
 </mapper>

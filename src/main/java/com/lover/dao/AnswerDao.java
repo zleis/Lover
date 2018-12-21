@@ -1,5 +1,10 @@
 package com.lover.dao;
 
+import com.lover.entity.Answer;
+
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * @Class: AnswerDao
  * @Author: ZLei
@@ -7,6 +12,19 @@ package com.lover.dao;
  * @TODO: 简答数据库
  */
 public interface AnswerDao {
-    
-    
+    /**
+     *
+     * @return
+     * @TODO 获取简答的数量
+     *
+     */
+    public Integer answerNum();
+
+    /**
+     *
+     * @param hashMap [start 开始点, length 长度]
+     * @return
+     * @TODO 获取简答列表
+     */
+    public List<Answer> answerList(HashMap hashMap);
 }
