@@ -9,17 +9,21 @@ public class Memory {
     private Date ctime; // 创建时间
     private int rtime;  // 阅读次数
     private int type;   // 类别
-    private String title;
+    private String title;   // 题目
+    private String intro;   // 简介
     private String content; // 内容
 
+    public Memory() {
+    }
 
-    public Memory(String mid, String man, Date ctime, int rtime, int type, String title, String content) {
+    public Memory(String mid, String man, Date ctime, int rtime, int type, String title,String intro, String content) {
         this.mid = mid;
         this.man = man;
         this.ctime = ctime;
         this.rtime = rtime;
         this.type = type;
         this.title = title;
+        this.intro = intro;
         this.content = content;
     }
 
@@ -77,6 +81,14 @@ public class Memory {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
     }
 
     @Override

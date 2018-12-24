@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Lover:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/Lover_war</output-path>
+    <root id="archive" name="Lover_war.war">
+      <element id="artifact" artifact-name="Lover:war exploded" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src/main/webapp" />
+    </root>
+  </artifact>
+</component>

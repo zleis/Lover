@@ -8,12 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
     <title>回忆录</title>
 
-    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
-    <link href="/css/base.css" rel="stylesheet" type="text/css"></link>
-    <link href="/css/list_wz.css" rel="stylesheet" type="text/css"></link>
+    <link href="/lover/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
+    <link href="/lover/css/base.css" rel="stylesheet" type="text/css"></link>
 
-    <script type="text/javascript" src="/js/jquery.js"></script>
-    <script type="text/javascript" src="/js/jq.snow.js"></script>
+    <script type="text/javascript" src="/lover/js/jquery.js"></script>
+    <script type="text/javascript" src="/lover/js/jq.snow.js"></script>
 </head>
 
 <body>
@@ -30,23 +29,27 @@
     <div class="main_box">
 
         <div class="logo">
-            <img src="/image/head_logo_left.png" style="float:left; left: 20px; width: 200px"></img>
-            <img src="/image/head_logo.png" style="text-align:center; width: 500px"></img>
-            <img src="/image/head_logo_right.png" style="float:right; right: 20px; width: 200px"></img>
+            <img src="/lover/image/head_logo_left.png" style="float:left; left: 20px; width: 200px"></img>
+            <img src="/lover/image/head_logo.png" style="text-align:center; width: 500px"></img>
+            <img src="/lover/image/head_logo_right.png" style="float:right; right: 20px; width: 200px"></img>
         </div>
         <!-- logo 结束 -->
 
         <!-- banner 开始 -->
         <div class="banner">
             <ul>
-                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'"><a th:href="${item.link}" th:text="${item.name}"></a> </li>
-                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" ><a th:href="${item.link}" th:text="${item.name}"></a></li>
+                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'">
+                    <a th:href="${item.link}" th:text="${item.name}"></a>
+                </li>
+                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" >
+                    <a th:href="${item.link}" th:text="${item.name}"></a>
+                </li>
             </ul>
         </div>
 
         <div class="address">
-            <img src="img/address_ico.png"></img>
-            <a href="index">首页</a>
+            <img src="/lover/image/address_ico.png"></img>
+            <a th:href="@{'/v/host/index'}">首页</a>
             <a>：</a>
             <a href="#">回忆录</a>
             <a>&gt;</a>
@@ -56,7 +59,7 @@
                 <div class="hot_content">
                     <div class="hot_content_box">
                         <div class="hot_content_box_title">
-                            <img src="/image/hot_list_ico.png"></img>回忆录类别
+                            <img src="/lover/image/hot_list_ico.png"></img>回忆录类别
                         </div>
                         <div class="hot_content_box_content">
                             <ul th:each ="item : ${mtype}">
@@ -73,18 +76,18 @@
                 </div>
                 <div class="list_pic_con_content">
                     <ul>
-                        <li>
-                            <img src="/image/hth.gif"></img>
-                            <p class="title"><a href="content.html">爱沛雨</a></p>
-                            <p class="time">时间：2018-10-23</p>
-                            <p class="con">简介<a href="content.html">【查看全文】</a></p>
+                        <li th:each = "memory:${memories}">
+                            <img src="/lover/image/hth.gif"></img>
+                            <p class="title"><a href="content.html" th:text="${memory.title}"></a></p>
+                            <p class="time">时间：<span th:text="${#dates.format(memory.ctime, 'yyyy-MM-dd')}"></span></p>
+                            <p class="con">简介<span th:text = "${memory.intro}"></span><a href="content.html">【查看全文】</a></p>
                         </li>
-                        <li>
-                            <img src="/image/hth.gif"></img>
-                            <p class="title"><a href="content.html">疼沛雨</a></p>
-                            <p class="time">时间：2018-10-24</p>
-                            <p class="con">简介<a href="content.html">【查看全文】</a></p>
-                        </li>
+                        <!--<li>-->
+                            <!--<img src="/lover/image/hth.gif"></img>-->
+                            <!--<p class="title"><a href="content.html">疼沛雨</a></p>-->
+                            <!--<p class="time">时间：2018-10-24</p>-->
+                            <!--<p class="con">简介<a href="content.html">【查看全文】</a></p>-->
+                        <!--</li>-->
                     </ul>
                     <div class="page">
                         <ul>
@@ -105,8 +108,12 @@
 
         <div class="bottom_banner">
             <ul>
-                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'"><a th:href="${item.link}" th:text="${item.name}"></a> </li>
-                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" ><a th:href="${item.link}" th:text="${item.name}"></a></li>
+                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'">
+                    <a th:href="${item.link}" th:text="${item.name}"></a>
+                </li>
+                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" >
+                    <a th:href="${item.link}" th:text="${item.name}"></a>
+                </li>
             </ul>
         </div>
         <div class="bottom">

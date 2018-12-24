@@ -14,13 +14,18 @@ public class Answer {
     private Date ctime; // 创建时间
     private int rtime;  // 阅读次数
     private String ques;    // 问题
+    private String intr;    // 简介
     private String content; // 答案
 
-    public Answer(String aid, Date ctime, int rtime, String ques, String content) {
+    public Answer() {
+    }
+
+    public Answer(String aid, Date ctime, int rtime, String intr, String ques, String content) {
         this.aid = aid;
         this.ctime = ctime;
         this.rtime = rtime;
         this.ques = ques;
+        this.intr = intr;
         this.content = content;
     }
 
@@ -62,6 +67,14 @@ public class Answer {
 
     public void setQues(String ques) {
         this.ques = ques;
+    }
+
+    public String getIntr() {
+        return intr;
+    }
+
+    public void setIntr(String intr) {
+        this.intr = intr;
     }
 
     @Override

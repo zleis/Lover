@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"></meta>
     <meta name="renderer" content="webkit"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
     <title>简答</title>
 
-    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
-    <link href="/css/base.css" rel="stylesheet" type="text/css"></link>
-    <link href="/css/list_wz.css" rel="stylesheet" type="text/css"></link>
+    <link href="/lover/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
+    <link href="/lover/css/base.css" rel="stylesheet" type="text/css"></link>
 
-    <script type="text/javascript" src="/js/jquery.js"></script>
-    <script type="text/javascript" src="/js/jq.snow.js"></script>
+    <script type="text/javascript" src="/lover/js/jquery.js"></script>
+    <script type="text/javascript" src="/lover/js/jq.snow.js"></script>
 
     <style>
         .list_pic_con {
@@ -22,15 +22,12 @@
             float: left;
         }
 
-        .answerItem{
-            width: 986px;
-        }
-
-        .list_pic_con_content ul li .time, .list_pic_con_content ul li .title, .list_pic_con_content ul li .con{
+        .list_pic_con_content ul li .time,
+        .list_pic_con_content ul li .title,
+        .list_pic_con_content ul li .con{
             float:left;
             margin-left: 30px;
             text-indent: 0em;
-
         }
     </style>
 </head>
@@ -49,23 +46,27 @@
     <div class="main_box">
 
         <div class="logo">
-            <img src="/image/head_logo_left.png" style="float:left; left: 20px; width: 200px"></img>
-            <img src="/image/head_logo.png" style="text-align:center; width: 500px"></img>
-            <img src="/image/head_logo_right.png" style="float:right; right: 20px; width: 200px"></img>
+            <img src="/lover/image/head_logo_left.png" style="float:left; left: 20px; width: 200px"></img>
+            <img src="/lover/image/head_logo.png" style="text-align:center; width: 500px"></img>
+            <img src="/lover/image/head_logo_right.png" style="float:right; right: 20px; width: 200px"></img>
         </div>
         <!-- logo 结束 -->
 
         <!-- banner 开始 -->
         <div class="banner">
             <ul>
-                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'"><a th:href="${item.link}" th:text="${item.name}"></a> </li>
-                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" ><a th:href="${item.link}" th:text="${item.name}"></a></li>
+                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'">
+                    <a th:href="${item.link}" th:text="${item.name}"></a>
+                </li>
+                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" >
+                    <a th:href="${item.link}" th:text="${item.name}"></a>
+                </li>
             </ul>
         </div>
 
         <div class="address">
-            <img src="/image/address_ico.png"></img>
-            <a href="index">首页</a>
+            <img src="/lover/image/address_ico.png"></img>
+            <a th:href="@{'/v/host/index'}">首页</a>
             <a>：</a>
             <a href="#">简答</a>
             <a>&gt;</a>
@@ -77,24 +78,27 @@
                 </div>
                 <div class="list_pic_con_content">
                     <ul>
-                        <li style="width: 986px">
-                            <img src="/image/hth.gif"></img>
-                            <p class="title"><a href="content.html">爱沛雨</a></p>
-                            <p class="time">时间：2018-10-23</p>
-                            <p class="con">简介<a href="content.html">【查看全文】</a></p>
+                        <li style="width: 986px;" th:each="answer:${answers}">
+                            <img src="/lover/image/hth.gif"></img>
+                            <p class="title"><a th:href="@{'/v/host/answerItem/' + ${answer.aid}}" th:text="${answer.ques}"></a></p>
+                            <p class="time">日期：<span th:text="${#dates.format(answer.ctime, 'yyyy-MM-dd')}"></span></p>
+                            <p class="con" >简介：<span th:text="${answer.intr}"></span><a th:href="@{'/v/host/answerItem/' + ${answer.aid}}">【查看全文】</a></p>
                         </li>
                     </ul>
                     <div class="page">
                         <ul>
-                            <li class="border_3">共195条</li>
-                            <li class="border_3">共50页</li>
-                            <li class="border_3"><a href="">首页</a></li>
-                            <li class="border_3"><a href="">《</a></li>
-                            <li class="border_3 active"><a href="">1</a></li>
-                            <li class="border_3"><a href="">2</a></li>
-                            <li class="border_3"><a href="">3</a></li>
-                            <li class="border_3"><a href="">末页</a></li>
-                            <li class="border_3"><a href="">》</a></li>
+                            <li class="border_3">共<span th:text="${ansNumber}"></span>条</li>
+                            <li class="border_3">共<span th:text="${ansPageNumber}"></span>页</li>
+                            <li class="border_3"><a th:href="@{'/v/host/answer/0'}">首页</a></li>
+                            <div th:each = "i : ${pageList}" style="display: inline">
+                                <li  th:if = "${page} != ${i}" class="border_3">
+                                    <a th:href="@{'/v/host/answer/'+${i}}" th:text = "${i}+1"></a>
+                                </li>
+                                <li th:if = "${page} == ${i}" class="border_3 active">
+                                    <a th:href="@{'/v/host/answer/'+${i}}" th:text = "${i}+1"></a>
+                                </li>
+                            </div>
+                            <li class="border_3"><a th:href="@{'/v/host/answer/' + ${ansPageNumber-1}}">末页</a></li>
                         </ul>
                     </div>
                 </div>
@@ -103,8 +107,12 @@
 
         <div class="bottom_banner">
             <ul>
-                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'"><a th:href="${item.link}" th:text="${item.name}"></a> </li>
-                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" ><a th:href="${item.link}" th:text="${item.name}"></a></li>
+                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'">
+                    <a th:href="${item.link}" th:text="${item.name}"></a>
+                </li>
+                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" >
+                    <a th:href="${item.link}" th:text="${item.name}"></a>
+                </li>
             </ul>
         </div>
         <div class="bottom">

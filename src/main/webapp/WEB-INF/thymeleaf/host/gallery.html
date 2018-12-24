@@ -6,17 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"></meta>
     <meta name="renderer" content="webkit"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
     <title>照片集</title>
 
-    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
-    <link href="/css/base.css" rel="stylesheet" type="text/css"></link>
-    <link href="/css/normalize.css" rel="stylesheet" type="text/css"></link>
-    <link href="/css/gallery.css" rel="stylesheet" type="text/css"></link>
+    <link href="/lover/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
+    <link href="/lover/css/base.css" rel="stylesheet" type="text/css"></link>
+    <link href="/lover/css/normalize.css" rel="stylesheet" type="text/css"></link>
+    <link href="/lover/css/gallery.css" rel="stylesheet" type="text/css"></link>
 
 
-    <script type="text/javascript" src="/js/jquery.js"></script>
-    <script type="text/javascript" src="/js/jq.snow.js"></script>
-    <script type="text/javascript" src="/js/pinterest_grid.js"></script>
+    <script type="text/javascript" src="/lover/js/jquery.js"></script>
+    <script type="text/javascript" src="/lover/js/jq.snow.js"></script>
+    <script type="text/javascript" src="/lover/js/pinterest_grid.js"></script>
 </head>
 
 <body>
@@ -33,22 +34,23 @@
     <div class="main_box">
 
         <div class="logo">
-            <img src="/image/head_logo_left.png" style="float:left; left: 20px; width: 200px"></img>
-            <img src="/image/head_logo.png" style="text-align:center; width: 500px"></img>
-            <img src="/image/head_logo_right.png" style="float:right; right: 20px; width: 200px"></img>
+            <img src="/lover/image/head_logo_left.png" style="float:left; left: 20px; width: 200px"></img>
+            <img src="/lover/image/head_logo.png" style="text-align:center; width: 500px"></img>
+            <img src="/lover/image/head_logo_right.png" style="float:right; right: 20px; width: 200px"></img>
         </div>
         <div class="banner">
             <ul>
-                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'"><a th:href="${item.link}"
-                                                                                           th:text="${item.name}"></a>
+                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'">
+                    <a th:href="${item.link}" th:text="${item.name}"></a>
                 </li>
-                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border"><a
-                        th:href="${item.link}" th:text="${item.name}"></a></li>
+                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border">
+                    <a th:href="${item.link}" th:text="${item.name}"></a>
+                </li>
             </ul>
         </div>
 
         <div class="address">
-            <img src="img/address_ico.png"></img>
+            <img src="/lover/image/address_ico.png"></img>
             <a href="index">首页</a>
             <a>：</a>
             <a href="#">照片集</a>
@@ -61,7 +63,7 @@
                 <div class="hot_content">
                     <div class="hot_content_box">
                         <div class="hot_content_box_title">
-                            <img src="/image/hot_list_ico.png"></img>照片类别
+                            <img src="/lover/image/hot_list_ico.png"></img>照片类别
                         </div>
                         <div class="hot_content_box_content">
                             <ul th:each="item : ${ptype}">
@@ -79,52 +81,52 @@
                 <div class="list_pic_con_content">
                     <section id="gallery-wrapper">
                         <article class="white-panel">
-                            <img src="/image/1.jpg" class="thumb"></img>
+                            <img src="/lover/image/1.jpg" class="thumb"></img>
                             <h1><a href="#">Title 1</a></h1>
                             <p>Description 1</p>
                         </article>
                         <article class="white-panel">
-                            <img src="/image/2.jpg" class="thumb"></img>
+                            <img src="/lover/image/2.jpg" class="thumb"></img>
                             <h1><a href="#">Title 2</a></h1>
                             <p>Description 2</p>
                         </article>
                         <article class="white-panel">
-                            <img src="/image/3.jpg" class="thumb"></img>
+                            <img src="/lover/image/3.jpg" class="thumb"></img>
                             <h1><a href="#">Title 3</a></h1>
                             <p>Description 3</p>
                         </article>
                         <article class="white-panel">
-                            <img src="/image/4.jpg" class="thumb"></img>
+                            <img src="/lover/image/4.jpg" class="thumb"></img>
                             <h1><a href="#">Title 4</a></h1>
                             <p>Description 4</p>
                         </article>
                         <article class="white-panel">
-                            <img src="/image/5.jpg" class="thumb"></img>
+                            <img src="/lover/image/5.jpg" class="thumb"></img>
                             <h1><a href="#">Title 5</a></h1>
                             <p>Description 5</p>
                         </article>
                         <article class="white-panel">
-                            <img src="/image/6.jpg" class="thumb"></img>
+                            <img src="/lover/image/6.jpg" class="thumb"></img>
                             <h1><a href="#">Title 6</a></h1>
                             <p>Description 6</p>
                         </article>
                         <article class="white-panel">
-                            <img src="/image/7.jpg" class="thumb"></img>
+                            <img src="/lover/image/7.jpg" class="thumb"></img>
                             <h1><a href="#">Title 7</a></h1>
                             <p>Description 7</p>
                         </article>
                         <article class="white-panel">
-                            <img src="/image/8.jpg" class="thumb"></img>
+                            <img src="/lover/image/8.jpg" class="thumb"></img>
                             <h1><a href="#">Title 8</a></h1>
                             <p>Description 8</p>
                         </article>
                         <article class="white-panel">
-                            <img src="/image/9.jpg" class="thumb"></img>
+                            <img src="/lover/image/9.jpg" class="thumb"></img>
                             <h1><a href="#">Title 9</a></h1>
                             <p>Description 9</p>
                         </article>
                         <article class="white-panel">
-                            <img src="/image/10.jpg" class="thumb"></img>
+                            <img src="/lover/image/10.jpg" class="thumb"></img>
                             <h1><a href="#">Title 10</a></h1>
                             <p>Description 10</p>
                         </article>
@@ -160,6 +162,7 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript">
     $(function () {
         $("#gallery-wrapper").pinterest_grid({
@@ -169,7 +172,6 @@
             margin_bottom: 50,
             single_column_breakpoint: 700
         });
-
     });
 </script>
 </body>

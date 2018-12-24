@@ -1,4 +1,4 @@
-package com.lover.controller.api;
+package com.lover.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;

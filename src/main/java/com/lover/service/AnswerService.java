@@ -19,4 +19,14 @@ public interface AnswerService {
      * @Todo 获取简答的数量
      */
     public int answerNumber();
+
+    /**
+     *
+     * @param aid
+     * @return
+     * @TODO 通过简答ID查找简答
+     */
+    public Answer answerFind(int aid);
+
+
 }

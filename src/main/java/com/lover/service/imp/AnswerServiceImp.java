@@ -29,4 +29,13 @@ public class AnswerServiceImp implements AnswerService {
     public int answerNumber() {
         return answerDao.answerNum();
     }
+
+
+    @Override
+    public Answer answerFind(int aid) {
+        HashMap map = new HashMap();
+        map.put("aid", aid);
+        Answer answer = answerDao.answerFind(map);
+        return answer;
+    }
 }

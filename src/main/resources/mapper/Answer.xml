@@ -6,18 +6,23 @@
         <!-- id用来配置表的主键与类的属性的映射关系 ,column指定的是表的字段名； property指定的是类的属性名-->
         <id column="aid" property="aid"/>
         <!-- result用来配置 普通字段与类的属性的映射关系 ,column指定的是表的字段名； property指定的是类的属性名-->
-        <result column="ctime" property="ctime"/>
+        <result column="ctime" property="ctime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
         <result column="rtime" property="rtime"/>
         <result column="ques" property="ques"/>
+        <result column="intr" property="intr" />
         <result column="content" property="content"/>
     </resultMap>
 
     <select id="answerList" resultType="com.lover.entity.Answer" parameterType="java.util.HashMap">
-        select * from answer limit #{start}, #{length}
+        select * from answer limit #{start, jdbcType=INTEGER}, #{length, jdbcType=INTEGER}
     </select>
 
     <select id="answerNum" resultType="Integer">
         select count(*) from answer;
+    </select>
+    
+    <select id="answerFind" resultType="com.lover.entity.Answer" parameterType="java.util.HashMap">
+        select * from answer where aid = #{aid};
     </select>
 
 </mapper>

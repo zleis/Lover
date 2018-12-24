@@ -27,4 +27,12 @@ public interface AnswerDao {
      * @TODO 获取简答列表
      */
     public List<Answer> answerList(HashMap hashMap);
+
+    /**
+     *
+     * @param hashMap
+     * @return
+     * @TODO 通过简答ID获取简答
+     */
+    public Answer answerFind(HashMap hashMap);
 }
