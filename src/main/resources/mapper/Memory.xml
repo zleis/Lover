@@ -19,6 +19,7 @@
         <id column="mid" property="mid"/>
         <!-- result用来配置 普通字段与类的属性的映射关系 ,column指定的是表的字段名； property指定的是类的属性名-->
         <result column="man" property="man"/>
+        <result column="manid" property="manID"/>
         <result column="ctime" property="ctime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         <result column="rtime" property="rtime" />
         <result column="type" property="type"/>
@@ -36,8 +37,15 @@
         select * from memory where mid = #{mid, jdbcType = INTEGER}
     </select>
 
+    <select id="memoryList" resultMap="memoryItemMap">
+        select * from memory order by ctime limit #{start, jdbcType = INTEGER}, #{length, jdbcType = INTEGER};
+    </select>
+
     <select id="memoryNumByType" resultType="Integer">
         select count(*) from memory where type = #{type, jdbcType = INTEGER};
     </select>
 
+    <select id="memoryNum" resultType="Integer">
+        select count(*) from memory;
+    </select>
 </mapper>

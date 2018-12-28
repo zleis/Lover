@@ -24,6 +24,13 @@ public interface MemoryDao {
 
     /**
      *
+     * @param hashMap
+     * @return
+     * 获取全部类别列表
+     */
+    List<Memory> memoryList(HashMap hashMap);
+    /**
+     *
      * @return
      * @TODO 根据mid获取记录
      */
@@ -35,5 +42,14 @@ public interface MemoryDao {
      * @return 回忆录类别的数量
      */
     int memoryNumByType(@Param("type")int type);
+
+
+    /**
+     *
+     * @return 回忆录总长度
+     */
+    int memoryNum();
+
+
 
 }

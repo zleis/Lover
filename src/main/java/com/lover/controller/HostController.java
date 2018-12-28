@@ -100,7 +100,7 @@ public class HostController{
         int mNum = memoryService.memoryLength(type);
         List<Memory> memories = memoryService.memoryListByType(type, page * Constant.MEMORY_PAGE_NUMBER, Constant.MEMORY_PAGE_NUMBER);
         int pageNum = (int)Math.ceil((double)mNum/(double)Constant.MEMORY_PAGE_NUMBER);
-
+        logger.info(pageNum);
         mv.addObject("mNum", mNum);
         mv.addObject("type", type);
         mv.addObject("page", page);
@@ -108,7 +108,18 @@ public class HostController{
         mv.addObject("memories", memories);
         mv.addObject("menu", hostService.getMenuList());
         mv.addObject("mtype", hostService.getMTypeList());
+        mv.addObject("pageList", getPageList(pageNum));
 
+        return mv;
+    }
+
+    @RequestMapping(value = "/memories/{code}", method = RequestMethod.GET)
+    public ModelAndView memoryItem(@PathVariable int code){
+        logger.info("/memories/" + code);
+        ModelAndView mv = new ModelAndView("host/memoryItem");
+
+        mv.addObject("memory", memoryService.memoryFind(code));
+        mv.addObject("menu", hostService.getMenuList());
         return mv;
     }
 

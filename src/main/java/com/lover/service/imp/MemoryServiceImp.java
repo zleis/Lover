@@ -1,6 +1,7 @@
 package com.lover.service.imp;
 
 import com.lover.dao.MemoryDao;
+import com.lover.entity.Constant;
 import com.lover.entity.Memory;
 import com.lover.service.MemoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,11 @@ public class MemoryServiceImp implements MemoryService {
         hashMap.put("type", type);
         hashMap.put("start", start);
         hashMap.put("length", length);
-
-        return memoryDao.memoryListByType(hashMap);
+        if(type == Constant.MEMORY_ALL_TYPE){
+            return memoryDao.memoryList(hashMap);
+        }else{
+            return memoryDao.memoryListByType(hashMap);
+        }
     }
 
     @Override
@@ -31,6 +35,11 @@ public class MemoryServiceImp implements MemoryService {
 
     @Override
     public int memoryLength(int type) {
-        return memoryDao.memoryNumByType(type);
+        if(type == Constant.MEMORY_ALL_TYPE){
+            return memoryDao.memoryNum();
+        }else{
+            return memoryDao.memoryNumByType(type);
+        }
+
     }
 }

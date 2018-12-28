@@ -396,19 +396,26 @@ a:active {
 
 	font-size: 2em;	font-weight: bold;
 }
+.content .author{
+	text-align: center;
+	font-size: 1em;
+	color: #1d1d1d;
+}
 
 .content hr{
-	border: #919191 solid 1px;
+	border: #282828 solid 1px;
 	margin: 5px;
 
 }
 
 .content .info{
 	margin: 8px;
+	font-size: 1em;
 	text-align: center;
 }
 
 .content .answer{
 	text-indent: 2em;
+	font-size: 1.2em;
 	padding: 25px;
 }

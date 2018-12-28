@@ -1,10 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"></meta>
+    <meta name="renderer" content="webkit"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+    <title>回忆录</title>
+
+    <link href="/lover/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
+    <link href="/lover/css/base.css" rel="stylesheet" type="text/css"></link>
+
+    <script type="text/javascript" src="/lover/js/jquery.js"></script>
+    <script type="text/javascript" src="/lover/js/jq.snow.js"></script>
+
 </head>
+
 <body>
+<script>
+    $(function () {
+        $.fn.snow({
+            minSize: 5,		//雪花的最小尺寸
+            maxSize: 50, 	//雪花的最大尺寸
+            newOn: 200		//雪花出现的频率 这个数值越小雪花越多
+        });
+    });
+</script>
+<div class="main">
+    <div class="main_box">
+
+        <div class="logo">
+            <img src="/lover/image/head_logo_left.png" style="float:left; left: 20px; width: 200px"></img>
+            <img src="/lover/image/head_logo.png" style="text-align:center; width: 500px"></img>
+            <img src="/lover/image/head_logo_right.png" style="float:right; right: 20px; width: 200px"></img>
+        </div>
+        <!-- logo 结束 -->
+
+        <!-- banner 开始 -->
+        <div class="banner">
+            <ul>
+                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'">
+                    <a th:href="${item.link}" th:text="${item.name}"></a>
+                </li>
+                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" >
+                    <a th:href="${item.link}" th:text="${item.name}"></a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="address">
+            <img src="/lover/image/address_ico.png"></img>
+            <a th:href="@{'/v/host/index'}">首页</a>
+            <a>：</a>
+            <a th:href="@{'/v/host/memories/0/0'}">回忆录</a>
+            <a>&gt;</a>
+        </div>
+        <div class="list_main">
+            <div class="content">
+                <div th:text="${memory.title}" class="title"></div>
+                <div th:text="${memory.man}" class="author"></div>
+                <div class="info">
+                    创建时间：
+                    <span th:text = "${#dates.format(memory.ctime, 'yyyy-MM-dd hh:mm:ss')}"></span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;阅读次数：
+                    <span th:text = "${memory.rtime}"></span>
+                </div>
+                <hr></hr>
+                <div th:text="${memory.content}" class="answer">
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="bottom_banner">
+            <ul>
+                <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'">
+                    <a th:href="${item.link}" th:text="${item.name}"></a>
+                </li>
+                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" >
+                    <a th:href="${item.link}" th:text="${item.name}"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="bottom">
+            COPYRIGHT版权所有
+        </div>
+    </div>
+</div>
 
 </body>
+
 </html>

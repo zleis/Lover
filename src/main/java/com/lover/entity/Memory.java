@@ -6,6 +6,7 @@ public class Memory {
 
     private String mid; // 回忆录ID
     private String man; // 创建人
+    private String manID;   // 创建人ID
     private Date ctime; // 创建时间
     private int rtime;  // 阅读次数
     private int type;   // 类别
@@ -89,6 +90,14 @@ public class Memory {
 
     public void setIntro(String intro) {
         this.intro = intro;
+    }
+
+    public String getManID() {
+        return manID;
+    }
+
+    public void setManID(String manID) {
+        this.manID = manID;
     }
 
     @Override
