@@ -29,7 +29,7 @@ public class MemoryServiceImp implements MemoryService {
     }
 
     @Override
-    public Memory memoryFind(int mid) {
+    public Memory memoryFind(String mid) {
         return memoryDao.memoryFind(mid);
     }
 

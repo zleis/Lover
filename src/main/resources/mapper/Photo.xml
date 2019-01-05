@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lover.dao.PhotoDao">
+    <!-- type指定的是对应的实体类 -->
+    <resultMap type="com.lover.entity.Photo" id="photoMap">
+        <!-- id用来配置表的主键与类的属性的映射关系 ,column指定的是表的字段名； property指定的是类的属性名-->
+        <id column="pid" property="pid"/>
+        <!-- result用来配置 普通字段与类的属性的映射关系 ,column指定的是表的字段名； property指定的是类的属性名-->
+        <result column="title" property="title"/>
+        <result column="intro" property="intro"/>
+        <result column="des" property="des"/>
+        <result column="place" property="place"/>
+        <result column="ctime" property="ctime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="type" property="type" />
+        <result column="src" property="src" />
+    </resultMap>
+    
+    <select id="photoList" resultMap="photoMap">
+        SELECT * FROM photo order by ctime limit
+        #{start, jdbcType = INTEGER}, #{length, jdbcType = INTEGER}
+    </select>
+    
+    <select id="photoListByType" resultMap="photoMap">
+        SELECT * FROM photo where type = #{type, jdbcType = INTEGER} order by ctime limit
+        #{start, jdbcType = INTEGER}, #{length, jdbcType = INTEGER}
+    </select>
+    
+    <select id="photoNumber" resultType="Integer">
+        select count(*) from photo;
+    </select>
+    
+    <select id="photoNumberByType" resultType="Integer">
+        select count(*) from photo where type = #{type, jdbcType = INTEGER}
+    </select>
+
+    <select id="photoFind" resultMap="photoMap">
+        select * from photo where pid = #{pid, jdbcType = VARCHAR}
+    </select>
+</mapper>

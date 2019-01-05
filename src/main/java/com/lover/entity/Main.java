@@ -1,8 +1,11 @@
 package com.lover.entity;
 
+/**
+ * @Class 主页语录
+ */
 public class Main {
-    private int id;
 
+    private int id;
     private String conent;
     private String className;
 

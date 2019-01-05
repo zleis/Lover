@@ -7,6 +7,8 @@
         <id column="mid" property="mid"/>
         <!-- result用来配置 普通字段与类的属性的映射关系 ,column指定的是表的字段名； property指定的是类的属性名-->
         <result column="pass" property="pass"/>
+        <result column="name" property="name"/>
+        <result column="photo" property="photo"/>
     </resultMap>
 
     <select id="getManager" parameterType="String" resultMap="managerMap">

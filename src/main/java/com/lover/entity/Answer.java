@@ -6,16 +6,17 @@ import java.util.Date;
  * @Class: Answer
  * @Author: ZLei
  * @Date: 14:10
- * @TODO: 简答
+ * @TODO: 简答实体
  */
 public class Answer {
 
-    private String aid; // 简答ID
-    private Date ctime; // 创建时间
-    private int rtime;  // 阅读次数
-    private String ques;    // 问题
-    private String intr;    // 简介
-    private String content; // 答案
+    private String aid;         // 简答ID
+    private Manager manager;    // 简答人
+    private Date ctime;         // 创建时间
+    private int rtime;          // 阅读次数
+    private String ques;        // 问题
+    private String intr;        // 简介
+    private String content;     // 答案
 
     public Answer() {
     }
@@ -77,12 +78,23 @@ public class Answer {
         this.intr = intr;
     }
 
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
+
     @Override
     public String toString() {
         return "Answer{" +
                 "aid='" + aid + '\'' +
+                ", manager=" + manager.toString() +
                 ", ctime=" + ctime +
                 ", rtime=" + rtime +
+                ", ques='" + ques + '\'' +
+                ", intr='" + intr + '\'' +
                 ", content='" + content + '\'' +
                 '}';
     }

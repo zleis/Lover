@@ -1,9 +1,7 @@
 package com.lover.controller;
 
 import com.lover.entity.*;
-import com.lover.service.AnswerService;
-import com.lover.service.HostService;
-import com.lover.service.MemoryService;
+import com.lover.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +32,12 @@ public class HostController{
 
     @Autowired
     private MemoryService memoryService;
+
+    @Autowired
+    private GalleryService galleryService;
+
+    @Autowired
+    private MessageService messageService;
 
     @RequestMapping("/index")
     public ModelAndView index(HttpServletRequest request){
@@ -74,12 +78,12 @@ public class HostController{
     }
 
     @RequestMapping(value = "/answerItem/{aid}", method = RequestMethod.GET)
-    public ModelAndView answerItem(@PathVariable int aid){
+    public ModelAndView answerItem(@PathVariable String aid){
         logger.info("/answerItem");
         ModelAndView mv = new ModelAndView("host/answerItem");
-
+        logger.info(aid);
         Answer answer = answerService.answerFind(aid);
-
+        logger.info(answer.toString());
         mv.addObject("answer",answer);
         mv.addObject("menu", hostService.getMenuList());
 
@@ -100,7 +104,6 @@ public class HostController{
         int mNum = memoryService.memoryLength(type);
         List<Memory> memories = memoryService.memoryListByType(type, page * Constant.MEMORY_PAGE_NUMBER, Constant.MEMORY_PAGE_NUMBER);
         int pageNum = (int)Math.ceil((double)mNum/(double)Constant.MEMORY_PAGE_NUMBER);
-        logger.info(pageNum);
         mv.addObject("mNum", mNum);
         mv.addObject("type", type);
         mv.addObject("page", page);
@@ -114,39 +117,63 @@ public class HostController{
     }
 
     @RequestMapping(value = "/memories/{code}", method = RequestMethod.GET)
-    public ModelAndView memoryItem(@PathVariable int code){
+    public ModelAndView memoryItem(@PathVariable String code){
         logger.info("/memories/" + code);
         ModelAndView mv = new ModelAndView("host/memoryItem");
-
-        mv.addObject("memory", memoryService.memoryFind(code));
+        Memory memory = memoryService.memoryFind(code);
+        logger.info(memory.toString());
+        mv.addObject("memory", memory);
         mv.addObject("menu", hostService.getMenuList());
         return mv;
     }
 
 
-    @RequestMapping("/gallery")
-    public ModelAndView gallery(HttpServletRequest request){
+    /** ------------------- 照片墙 ----------------------*/
+    @RequestMapping(value = "/gallery/{type}/{page}", method = RequestMethod.GET)
+    public ModelAndView gallery(@PathVariable int type, @PathVariable int page){
         logger.info("/gallery");
         ModelAndView mv = new ModelAndView("host/gallery");
 
+        int photoNum = galleryService.photoNumber(type);
+        int pageNum = (int)Math.ceil((double)photoNum/(double)Constant.PHOTO_PAGE_NUMBER);
+
+        mv.addObject("type", type);
+        mv.addObject("page", page);
+        mv.addObject("pageNum",pageNum);
+        mv.addObject("photoNum", photoNum);
+        mv.addObject("pageList", getPageList(pageNum));
+        mv.addObject("photos", galleryService.photoList(type, page));
         mv.addObject("menu", hostService.getMenuList());
         mv.addObject("ptype", hostService.getPTypeList());
+        return mv;
+    }
+    @RequestMapping(value = "/galleryItem/{code}", method = RequestMethod.GET)
+    public ModelAndView galleryItem(@PathVariable String code){
+        logger.info("/galleryItem/" + code);
+        ModelAndView mv = new ModelAndView("host/galleryItem");
 
+        mv.addObject("photo", galleryService.photoFind(code));
+        mv.addObject("menu", hostService.getMenuList());
         return mv;
     }
 
-    // 简答页面
+    /** ------------------------ 留言板 -------------------------------- */
+    @RequestMapping(value = "/message/{page}")
+    public ModelAndView messageList(@PathVariable int page){
+        logger.info("/message/" + page);
+        ModelAndView mv = new ModelAndView("host/message");
+        int msgNumber = messageService.messageNum();
+        int msgPageNumber = (int)Math.ceil((double)msgNumber/(double)Constant.MESSAGE_PAGE_NUMBER);
 
-
-
-    // 回忆录页面
-    @RequestMapping("/memoryitem")
-    public ModelAndView memoryItem(HttpServletRequest request){
-        logger.info("/memoryItem");
-        ModelAndView mv = new ModelAndView("host/memoryItem");
-
+        mv.addObject("page", page);
+        mv.addObject("pageNum", msgPageNumber);
+        mv.addObject("messageNum", msgNumber);
+        mv.addObject("message", messageService.messageList(page));
+        mv.addObject("pageList", getPageList(msgPageNumber));
+        mv.addObject("menu", hostService.getMenuList());
         return mv;
     }
+
 
     private List<Integer> getPageList(int length){
         List<Integer> pageList = new ArrayList<>();

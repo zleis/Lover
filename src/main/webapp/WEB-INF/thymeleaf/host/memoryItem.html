@@ -59,7 +59,7 @@
         <div class="list_main">
             <div class="content">
                 <div th:text="${memory.title}" class="title"></div>
-                <div th:text="${memory.man}" class="author"></div>
+                <div th:text="${memory.manager.name}" class="author"></div>
                 <div class="info">
                     创建时间：
                     <span th:text = "${#dates.format(memory.ctime, 'yyyy-MM-dd hh:mm:ss')}"></span>

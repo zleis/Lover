@@ -18,7 +18,7 @@ public interface MemoryService {
      * @return
      * @Todo 获取回忆录详细列表
      */
-    public Memory memoryFind(int mid);
+    public Memory memoryFind(String mid);
 
     /**
      * @param type 类别

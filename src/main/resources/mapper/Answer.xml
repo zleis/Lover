@@ -11,7 +11,17 @@
         <result column="ques" property="ques"/>
         <result column="intr" property="intr" />
         <result column="content" property="content"/>
+        <association property="manager" javaType="com.lover.entity.Manager">
+            <id column="mid" property="mid"/>
+            <result column="name" property="name"/>
+            <result column="photo" property="photo"/>
+        </association>
     </resultMap>
+
+    <sql id = "answerSqlMap">
+        a.aid as aid, a.ctime as ctime, a.rtime as rtime, a.ques as ques, a.intr as intr, a.content as content,
+        m.mid as mid, m.name as name, m.photo as photo
+    </sql>
 
     <select id="answerList" resultType="com.lover.entity.Answer" parameterType="java.util.HashMap">
         select * from answer limit #{start, jdbcType=INTEGER}, #{length, jdbcType=INTEGER}
@@ -21,8 +31,8 @@
         select count(*) from answer;
     </select>
     
-    <select id="answerFind" resultType="com.lover.entity.Answer" parameterType="java.util.HashMap">
-        select * from answer where aid = #{aid};
+    <select id="answerFind" resultMap="answerMap" parameterType="java.util.HashMap">
+        select <include refid="answerSqlMap"/> from answer as a ,manager as m where a.mid = m.mid and aid = #{aid,jdbcType=VARCHAR};
     </select>
 
 </mapper>

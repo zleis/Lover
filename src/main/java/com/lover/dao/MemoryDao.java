@@ -34,7 +34,7 @@ public interface MemoryDao {
      * @return
      * @TODO 根据mid获取记录
      */
-    Memory memoryFind(@Param("mid")int mid);
+    Memory memoryFind(@Param("mid")String mid);
 
     /**
      *

@@ -2,11 +2,14 @@ package com.lover.entity;
 
 import java.util.Date;
 
+/**
+ * @Class Memory
+ * @TODO 回忆录实体对象
+ */
 public class Memory {
 
     private String mid; // 回忆录ID
-    private String man; // 创建人
-    private String manID;   // 创建人ID
+    private Manager manager; // 创建人
     private Date ctime; // 创建时间
     private int rtime;  // 阅读次数
     private int type;   // 类别
@@ -17,17 +20,6 @@ public class Memory {
     public Memory() {
     }
 
-    public Memory(String mid, String man, Date ctime, int rtime, int type, String title,String intro, String content) {
-        this.mid = mid;
-        this.man = man;
-        this.ctime = ctime;
-        this.rtime = rtime;
-        this.type = type;
-        this.title = title;
-        this.intro = intro;
-        this.content = content;
-    }
-
     public String getMid() {
         return mid;
     }
@@ -36,12 +28,12 @@ public class Memory {
         this.mid = mid;
     }
 
-    public String getMan() {
-        return man;
+    public Manager getManager() {
+        return manager;
     }
 
-    public void setMan(String man) {
-        this.man = man;
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 
     public Date getCtime() {
@@ -68,14 +60,6 @@ public class Memory {
         this.type = type;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -92,22 +76,25 @@ public class Memory {
         this.intro = intro;
     }
 
-    public String getManID() {
-        return manID;
+    public String getContent() {
+        return content;
     }
 
-    public void setManID(String manID) {
-        this.manID = manID;
+    public void setContent(String content) {
+        this.content = content;
     }
+
 
     @Override
     public String toString() {
         return "Memory{" +
                 "mid='" + mid + '\'' +
-                ", man='" + man + '\'' +
+                ", manager=" + manager.toString() +
                 ", ctime=" + ctime +
                 ", rtime=" + rtime +
                 ", type=" + type +
+                ", title='" + title + '\'' +
+                ", intro='" + intro + '\'' +
                 ", content='" + content + '\'' +
                 '}';
     }

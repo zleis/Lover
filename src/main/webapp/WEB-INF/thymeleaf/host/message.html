@@ -7,10 +7,11 @@
     <meta name="renderer" content="webkit"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
 
-    <title>简答</title>
+    <title>语录板</title>
 
     <link href="/lover/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
     <link href="/lover/css/base.css" rel="stylesheet" type="text/css"></link>
+    <link href="/lover/css/photo.css" rel="stylesheet" type="text/css"></link>
 
     <script type="text/javascript" src="/lover/js/jquery.js"></script>
     <script type="text/javascript" src="/lover/js/jq.snow.js"></script>
@@ -43,7 +44,7 @@
                 <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'">
                     <a th:href="${item.link}" th:text="${item.name}"></a>
                 </li>
-                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" >
+                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border">
                     <a th:href="${item.link}" th:text="${item.name}"></a>
                 </li>
             </ul>
@@ -53,36 +54,50 @@
             <img src="/lover/image/address_ico.png"></img>
             <a th:href="@{'/v/host/index'}">首页</a>
             <a>：</a>
-            <a th:href="@{'/v/host/answer/0'}">简答</a>
+            <a href="#">语录板</a>
             <a>&gt;</a>
         </div>
         <div class="list_main">
-            <div class="content">
-                <div th:text="${answer.ques}" class="title"></div>
-                <div class="info">
-                    作者：
-                    <span th:text = "${answer.manager.name}"></span>
+            <div>
+                <div id="msgBox">
+                    <div class="list">
+                        <h3><span>语录板</span></h3>
+                        <ul>
+                            <li th:each="msg :${message}">
+                                <div class="userPic"><img th:src="${msg.manager.photo}"></img> </div>
+                                <div class="msgcontent">
+                                    <div class="userName"><a href="#" th:text="${msg.manager.name}"></a></div>
+                                    <div class="msgInfo" th:text = "${msg.content}"></div>
+                                    <div class="times"><span th:text = "${#dates.format(msg.ctime, 'yyyy-MM-dd hh:mm:ss')}"></span></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="info">
-                    创建时间：
-                    <span th:text = "${#dates.format(answer.ctime, 'yyyy-MM-dd hh:mm:ss')}"></span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;阅读次数：
-                    <span th:text = "${answer.rtime}"></span>
+                <div class="page">
+                    <ul>
+                        <li class="border_3">共<span th:text="${messageNum}"></span>条</li>
+                        <li class="border_3">共<span th:text="${pageNum}"></span>页</li>
+                        <li class="border_3"><a th:href="@{'/v/host/message/0'}">首页</a></li>
+                        <div th:each="i : ${pageList}" style="display: inline">
+                            <li th:if="${page} != ${i}" class="border_3">
+                                <a th:href="@{'/v/host/message/'+${i}}" th:text="${i}+1"></a>
+                            </li>
+                            <li th:if="${page} == ${i}" class="border_3 active">
+                                <a th:href="@{'/v/host/message/'+${i}}" th:text="${i}+1"></a>
+                            </li>
+                        </div>
+                        <li class="border_3"><a th:href="@{'/v/host/message/' + ${pageNum-1}}">末页</a></li>
+                    </ul>
                 </div>
-                <hr></hr>
-                <div th:text="${answer.content}" class="answer">
-
-                </div>
-
             </div>
         </div>
-
         <div class="bottom_banner">
             <ul>
                 <li th:each="item, iterator : ${menu}" th:if="${iterator.index} eq '0'">
                     <a th:href="${item.link}" th:text="${item.name}"></a>
                 </li>
-                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border" >
+                <li th:each="item, iterator : ${menu}" th:unless="${iterator.index} eq '0'" class="left_border">
                     <a th:href="${item.link}" th:text="${item.name}"></a>
                 </li>
             </ul>

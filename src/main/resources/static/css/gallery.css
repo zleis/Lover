@@ -43,7 +43,7 @@ img.thumb {
     -moz-osx-font-smoothing: grayscale;
 }
 
-body, html { font-size: 100%; 	padding: 0; margin: 0;}
+body, html {padding: 0; margin: 0;}
 
 /* Reset */
 *,
@@ -67,7 +67,6 @@ body, html { font-size: 100%; 	padding: 0; margin: 0;}
 
 body{
     font-weight: 500;
-    font-size: 1.05em;
     font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
 }
 

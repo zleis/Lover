@@ -389,6 +389,7 @@ a:active {
 .content{
 	width: 100%;
 	border: #fa8597 dashed 1px;
+	padding: 20px;
 }
 
 .content .title{

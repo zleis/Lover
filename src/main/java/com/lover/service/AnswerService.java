@@ -26,7 +26,7 @@ public interface AnswerService {
      * @return
      * @TODO 通过简答ID查找简答
      */
-    public Answer answerFind(int aid);
+    public Answer answerFind(String aid);
 
 
 }

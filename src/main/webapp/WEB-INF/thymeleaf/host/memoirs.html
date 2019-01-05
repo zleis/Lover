@@ -64,9 +64,11 @@
                         <div class="hot_content_box_content">
                             <ul>
                                 <li><a th:href="@{/v/host/memoirs/0/0}">全部</a></li>
-                                <div th:each ="item : ${mtype}">
-                                    <li><a th:href="@{'/v/host/memoirs/' + ${item.mid} + '/0'}" th:text="${item.name}"></a></li>
-                                </div>
+
+                                <li th:each ="item : ${mtype}">
+                                    <a th:href="@{'/v/host/memoirs/' + ${item.mid} + '/0'}" th:text="${item.name}"></a>
+                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -105,7 +107,7 @@
                                     <a th:href="@{'/v/host/memoirs/'+${type} + '/' + ${i}}" th:text = "${i}+1"></a>
                                 </li>
                             </div>
-                            <li class="border_3"><a th:href="@{'/v/host/memoirs/'+${type} + '/' + ${pageNum-1}}">末页</a></li>
+                            <li class="border_4"><a th:href="@{'/v/host/memoirs/'+${type} + '/' + ${pageNum-1}}">末页</a></li>
                         </ul>
                     </div>
                 </div>

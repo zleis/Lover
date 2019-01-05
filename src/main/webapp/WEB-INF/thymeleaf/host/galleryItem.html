@@ -7,14 +7,18 @@
     <meta name="renderer" content="webkit"></meta>
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
 
-    <title>简答</title>
+    <title>照片</title>
 
     <link href="/lover/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
     <link href="/lover/css/base.css" rel="stylesheet" type="text/css"></link>
 
     <script type="text/javascript" src="/lover/js/jquery.js"></script>
     <script type="text/javascript" src="/lover/js/jq.snow.js"></script>
-
+    <style>
+        .image{
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -53,24 +57,23 @@
             <img src="/lover/image/address_ico.png"></img>
             <a th:href="@{'/v/host/index'}">首页</a>
             <a>：</a>
-            <a th:href="@{'/v/host/answer/0'}">简答</a>
+            <a th:href="@{'/v/host/gallery/0/0'}">简答</a>
             <a>&gt;</a>
         </div>
         <div class="list_main">
             <div class="content">
-                <div th:text="${answer.ques}" class="title"></div>
-                <div class="info">
-                    作者：
-                    <span th:text = "${answer.manager.name}"></span>
-                </div>
+                <div th:text="${photo.title}" class="title"></div>
                 <div class="info">
                     创建时间：
-                    <span th:text = "${#dates.format(answer.ctime, 'yyyy-MM-dd hh:mm:ss')}"></span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;阅读次数：
-                    <span th:text = "${answer.rtime}"></span>
+                    <span th:text = "${#dates.format(photo.ctime, 'yyyy-MM-dd hh:mm:ss')}"></span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;拍摄地点：
+                    <span th:text = "${photo.place}"></span>
                 </div>
                 <hr></hr>
-                <div th:text="${answer.content}" class="answer">
+                <div class="image">
+                    <img th:src = "${photo.src}" style="width: 60%; "></img>
+                </div>
+                <div th:text="${photo.des}" class="answer">
 
                 </div>
 

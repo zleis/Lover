@@ -32,7 +32,7 @@ public class AnswerServiceImp implements AnswerService {
 
 
     @Override
-    public Answer answerFind(int aid) {
+    public Answer answerFind(String aid) {
         HashMap map = new HashMap();
         map.put("aid", aid);
         Answer answer = answerDao.answerFind(map);
