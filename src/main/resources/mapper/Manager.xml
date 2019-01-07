@@ -11,7 +11,7 @@
         <result column="photo" property="photo"/>
     </resultMap>
 
-    <select id="getManager" parameterType="String" resultMap="managerMap">
+    <select id="managerFind" parameterType="String" resultMap="managerMap">
         select * from manager WHERE mid = #{mid}
     </select>
 </mapper>

@@ -1,0 +1,82 @@
+
+.header {
+    top: 0;
+    height: 60px;
+    background: #426374;
+    opacity: 0.5;
+}
+
+.loginWraper {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #3283AC url(/lover/image/admin-login-bg.jpg) no-repeat center;
+}
+
+.loginBox {
+    position: absolute;
+    width: 617px;
+    height: 330px;
+    background: url(/lover/image/admin-loginform-bg.png) no-repeat;
+    left: 50%;
+    top: 50%;
+    margin-left: -309px;
+    margin-top: -184px;
+    padding-top: 38px;
+}
+
+.loginhead {
+    width: 617px;
+    height: 32px;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 20px;
+    margin: 0 auto;
+}
+
+.loginBox .row {
+    margin-top: 20px;
+}
+
+.form-horizontal .form-label {
+    margin-top: 3px;
+    cursor: text;
+    text-align: right;
+}
+
+.form-label {
+    display: block;
+    color: #555;
+}
+input{
+    font-family: "Microsoft Yahei", "Hiragino Sans GB", "Helvetica Neue", Helvetica, tahoma, arial, "WenQuanYi Micro Hei", Verdana, sans-serif, "\5B8B\4F53"
+}
+
+.loginBox .input-text {
+    width: 360px;
+}
+.footer {
+    bottom: 0;
+    text-align: center;
+    font-size: 12px;
+    background-color: #426374;
+    opacity: 0.8;
+    border-top: 1px solid #e8e8e8;
+    padding: 15px 0;
+    color: #e2e2e2;
+    line-height: 22px;
+}
+
+.header, .footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 99;
+}
+.footer {
+
+}

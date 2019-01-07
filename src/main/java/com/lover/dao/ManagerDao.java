@@ -1,6 +1,7 @@
 package com.lover.dao;
 
 import com.lover.entity.Manager;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -11,6 +12,15 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ManagerDao {
+
+    /**
+     * @Method managerFind
+     * @Date 2019/1/6
+     * @TODO 查找管理员
+     */
+    public Manager managerFind(@Param("mid")String mid);
+
+
 
 
 }
