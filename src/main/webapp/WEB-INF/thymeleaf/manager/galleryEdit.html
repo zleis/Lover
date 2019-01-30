@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Title</title>
+    <link rel="stylesheet" href="/lover/font/iconfont.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/lib/layui/css/layui.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/manager.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/bootstrap.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/sweet-alert.css" type="text/css"></link>
+
+    <script type="text/javascript" src="/lover/js/jquery.js"></script>
+    <script type="text/javascript" src="/lover/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/lover/js/xadmin.js"></script>
+    <script type="text/javascript" src="/lover/js/myjs.js"></script>
+    <script type="text/javascript" src="/lover/js/sweetalert.min.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="x-body">
+    <div class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <label for="title" class="layui-form-label">
+                <span class="x-red">*</span>标题
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="title" name="title" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input" th:value = "${photo.title}"></input>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="intro" class="layui-form-label">
+                <span class="x-red">*</span>介绍
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="intro" name="intro" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input" th:value="${photo.intro}"></input>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="des" class="layui-form-label">
+                <span class="x-red">*</span>描述
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="des" name="des" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input" th:value="${photo.des}"></input>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="place" class="layui-form-label">
+                <span class="x-red">*</span>地点
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="place" name="place" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input" th:value="${photo.place}"></input>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="type" class="layui-form-label">
+                <span class="x-red">*</span>类别
+            </label>
+            <div class="layui-input-block" style="width: 190px;">
+                <select name="city" id="type" lay-verify="required">
+                    <div th:each = "pitem:${ptypes}">
+                        <option th:if="${pitem.pid} == ${photo.type}"  th:value="${pitem.pid}" selected = "true" th:text="${pitem.name}"></option>
+                        <option th:unless="${pitem.pid} == ${photo.type}"  th:value="${pitem.pid}" th:text="${pitem.name}"></option>
+                    </div>
+                </select>
+            </div>
+        </div>
+        <div class="layui-upload">
+            <button type="button" class="layui-btn" id="image">上传图片</button>
+            <div class="layui-upload-list">
+                <img class="layui-upload-img" id="demo1" style="width: 200px;" th:src = "${photo.src}"></img>
+                <p id="demoText"></p>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <button class="layui-btn" lay-submit="" id="submit" lay-filter="add">修改</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/lover/js/wangEditor.js"></script>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        var data = new Object();
+        data['pid'] = [[${photo.pid}]];
+        data['src'] = [[${photo.src}]];
+
+        var ctime = 0;
+        layui.use('upload', function(){
+            var upload = layui.upload;
+
+            //普通图片上传
+            var uploadInst = upload.render({
+                elem: '#image'
+                ,url: [[${upURL}]]
+                ,before: function(obj){
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        $('#demo1').attr('src', result); //图片链接（base64）
+                    });
+                }
+                ,done: function(res){
+                    if(loadResult(res.feedback)){
+                        data['src'] = res.obj['src'];
+                        console.log(data);
+                        ctime = data['ctime'];
+                    }
+                }
+                ,error: function(){
+                    //演示失败状态，并实现重传
+                    var demoText = $('#demoText');
+                    demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                    demoText.find('.demo-reload').on('click', function(){
+                        uploadInst.upload();
+                    });
+                }
+            });
+        });
+
+        $("#submit").click(function () {
+
+            var title = $("#title").val();
+            var intro = $("#intro").val();
+            var des = $("#des").val();
+            var place = $("#place").val();
+            var type = $("#type").val();
+            if(title.length == 0 || intro.length == 0 || des.length == 0 || place.length == 0){
+                alerterror("请输入正确信息");
+                return;
+            }
+
+            data['title'] = encodeURI(title);
+            data['intro'] = encodeURI(intro);
+            data['des'] = encodeURI(des);
+            data['place'] = encodeURI(place);
+            data['ctime'] = new Date(ctime);
+            data['type'] = type;
+            console.log(data);
+            var sendurl = [[${url}]];
+            console.log(sendurl);
+            var res = requestSend(sendurl, data);
+            if(loadResult(res.feedback, res.msg)){
+                swal({
+                    title:  "提示",
+                    text: "修改成功",
+                    icon: "success",
+                }).then((willDelete) => {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    window.parent.location.reload();
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                });
+            }
+        })
+    })
+
+</script>
+</body>
+</html>

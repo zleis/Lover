@@ -71,7 +71,7 @@
                     <span th:text = "${answer.rtime}"></span>
                 </div>
                 <hr></hr>
-                <div th:text="${answer.content}" class="answer">
+                <div class="answer" id = "answer">
 
                 </div>
 
@@ -94,6 +94,12 @@
     </div>
 </div>
 
+<script th:inline="javascript">
+    $(document).ready(function () {
+        $("#answer").append([[${answer.content}]]);
+    })
+
+</script>
 </body>
 
 </html>

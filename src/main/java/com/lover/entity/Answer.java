@@ -1,5 +1,7 @@
 package com.lover.entity;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 
 /**
@@ -84,6 +86,31 @@ public class Answer {
 
     public void setManager(Manager manager) {
         this.manager = manager;
+    }
+
+    public void answerManager(String mid){
+        Manager manager = new Manager();
+        manager.setMid(mid);
+        this.manager = manager;
+    }
+
+    /**
+     * @Method answerFormat
+     * @Date 2019/1/20
+     * @TODO 格式化简答属性，除了复杂对象
+     */
+    public void answerFormat(){
+
+        this.ctime = new Date();
+
+        try{
+            this.ques = URLDecoder.decode(this.ques,"UTF-8");
+            this.intr = URLDecoder.decode(this.intr, "UTF-8");
+            this.content = URLDecoder.decode(this.content, "UTF-8");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @Override

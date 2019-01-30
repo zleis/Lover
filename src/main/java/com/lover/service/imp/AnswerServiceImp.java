@@ -3,6 +3,8 @@ package com.lover.service.imp;
 import com.lover.dao.AnswerDao;
 import com.lover.entity.Answer;
 import com.lover.entity.Constant;
+import com.lover.entity.Feedback;
+import com.lover.entity.Result;
 import com.lover.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,24 @@ public class AnswerServiceImp implements AnswerService {
         HashMap map = new HashMap();
         map.put("aid", aid);
         Answer answer = answerDao.answerFind(map);
+        answerDao.answerRead(aid);
         return answer;
+    }
+    @Override
+    public Result answerAdd(Answer answer) {
+        answerDao.answerAdd(answer);
+        return Result.resultFactory(Feedback.FEEDBACK_SUCCESS);
+    }
+
+    @Override
+    public Result answerDel(Answer answer) {
+        answerDao.answerDel(answer.getAid());
+        return Result.resultFactory(Feedback.FEEDBACK_SUCCESS);
+    }
+
+    @Override
+    public Result answerEdit(Answer answer) {
+        answerDao.answerEdit(answer);
+        return Result.resultFactory(Feedback.FEEDBACK_SUCCESS);
     }
 }

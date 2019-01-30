@@ -47,4 +47,25 @@ public interface PhotoDao {
      */
     public Photo photoFind(@Param("pid")String pid);
 
+    /**
+     * @Method photoAdd
+     * @Date 2019/1/30
+     * @TODO 添加图片
+     */
+    public void photoAdd(Photo photo);
+
+    /**
+     * @Method photoEdit
+     * @Date 2019/1/30
+     * @TODO 修改照片
+     */
+    public void photoEdit(Photo photo);
+
+    /**
+     * @Method photoDel
+     * @Date 2019/1/30
+     * @TODO 删除图片
+     */
+    public void photoDel(Photo photo);
+
 }

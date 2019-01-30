@@ -44,6 +44,13 @@ public class Result {
         this.msg = msg;
     }
 
+    public static Result resultFactory(Feedback feedback){
+        Result result = new Result();
+        result.feedback = feedback.getFeedback();
+        result.msg = feedback.getComment();
+        return result;
+    }
+
     @Override
     public String toString() {
         return "Result{" +

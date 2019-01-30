@@ -1,6 +1,7 @@
 package com.lover.dao;
 
 import com.lover.entity.Message;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,8 +25,17 @@ public interface MessageDao {
 
     /**
      *
-     * @param hashMap
      * 添加消息
      */
-    public void messageAdd(HashMap hashMap);
+    public void messageAdd(Message message);
+
+    /**
+     * @Method messageDel
+     * @Date 2019/1/27
+     * @TODO 删除消息
+     */
+    public void messageDel(@Param("mid")String mid);
+
+
+
 }

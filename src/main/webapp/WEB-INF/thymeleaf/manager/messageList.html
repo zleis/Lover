@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"></meta>
+    <link rel="stylesheet" href="/lover/font/iconfont.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/lib/layui/css/layui.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/manager.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/base.css"  type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/bootstrap.css"  type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/sweet-alert.css" type="text/css"></link>
+
+    <script type="text/javascript" src="/lover/js/jquery.js"></script>
+    <script type="text/javascript" src="/lover/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/lover/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="/lover/js/xadmin.js"></script>
+    <script type="text/javascript" src="/lover/js/myjs.js"></script>
+    <title>语录列表</title>
+</head>
+<body>
+<div class="x-body">
+    <div class="list">
+        <ul>
+            <li th:each="message:${messages}">
+                <img src="/lover/image/list_con_ico.png"></img>
+                <span style="float: none">[语录]</span>
+                <a href="#" th:text="${message.intro}"></a>
+                <span th:text="${#dates.format(message.ctime, 'yyyy-MM-dd')}"></span>
+                <span>
+                    <a href="#" th:onclick="'javascript:del(\''+${message.mid}+'\')'" class="oper">删除</a>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="page">
+        <ul>
+            <li class="border_3">共<span th:text="${msgNum}"></span>条</li>
+            <li class="border_3">共<span th:text="${msgNum}"></span>页</li>
+            <li class="border_3"><a th:href="@{'/v/manager/messageList/0'}">首页</a></li>
+            <div th:each="i : ${pageList}" style="display: inline">
+                <li th:if="${curPage} != ${i}" class="border_3">
+                    <a th:href="@{'/v/manager/messageList/'+${i}}" th:text="${i}+1"></a>
+                </li>
+                <li th:if="${curPage} == ${i}" class="border_3 active">
+                    <a th:href="@{'/v/manager/messageList/'+${i}}" th:text="${i}+1"></a>
+                </li>
+            </div>
+            <li class="border_4"><a th:href="@{'/v/manager/messageList/' + ${msgNum-1}}">末页</a></li>
+        </ul>
+    </div>
+
+</div>
+<script th:inline="javascript">
+    function del(id) {
+        swal({
+            title:  "确定删除吗？",
+            text: "您将删除该语录",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+            if (willDelete) {
+                delMsg(id);
+            }
+        });
+    }
+
+    function delMsg(id) {
+        var data = new Object();
+        var sendurl = [[${delURL}]];
+        data['mid'] = id;
+        var res = requestSend(sendurl, data);
+        if (loadResult(res.feedback,res.msg)) {
+            location.reload();
+        }
+    }
+
+    function edit(id) {
+        x_admin_show('编辑', '../answerEdit/' + id);
+    }
+
+
+</script>
+</body>
+</html>

@@ -23,6 +23,10 @@
         m.mid as mid, m.name as name, m.photo as photo
     </sql>
 
+    <sql id = "insertAnsMap">
+        (aid, mid, ctime, rtime, ques, intr, content)
+    </sql>
+
     <select id="answerList" resultType="com.lover.entity.Answer" parameterType="java.util.HashMap">
         select * from answer limit #{start, jdbcType=INTEGER}, #{length, jdbcType=INTEGER}
     </select>
@@ -34,5 +38,22 @@
     <select id="answerFind" resultMap="answerMap" parameterType="java.util.HashMap">
         select <include refid="answerSqlMap"/> from answer as a ,manager as m where a.mid = m.mid and aid = #{aid,jdbcType=VARCHAR};
     </select>
+
+    <insert id="answerAdd" parameterType="com.lover.entity.Answer">
+        insert into answer <include refid="insertAnsMap"/> value (#{aid, jdbcType=VARCHAR}, #{manager.mid, jdbcType=VARCHAR}, #{ctime, jdbcType=TIMESTAMP},
+        #{rtime, jdbcType=INTEGER}, #{ques, jdbcType=VARCHAR}, #{intr, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR})
+    </insert>
+    
+    <update id="answerRead" parameterType="String">
+        update answer set rtime = rtime + 1 where aid = #{aid, jdbcType = VARCHAR}
+    </update>
+
+    <delete id="answerDel" parameterType="String">
+        delete from answer where aid = #{aid, jdbcType = VARCHAR}
+    </delete>
+
+    <update id="answerEdit" parameterType="com.lover.entity.Answer">
+        update answer set ques = #{ques, jdbcType = VARCHAR}, intr = #{intr, jdbcType = VARCHAR}, content = #{content, jdbcType = VARCHAR} where aid = #{aid, jdbcType=VARCHAR}
+    </update>
 
 </mapper>

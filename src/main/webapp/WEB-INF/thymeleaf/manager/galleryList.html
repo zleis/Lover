@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"></meta>
+    <link rel="stylesheet" href="/lover/font/iconfont.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/lib/layui/css/layui.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/manager.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/base.css"  type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/bootstrap.css"  type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/sweet-alert.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/galleryView.css" type="text/css"></link>
+
+    <script type="text/javascript" src="/lover/js/jquery.js"></script>
+    <script type="text/javascript" src="/lover/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/lover/js/pinterest_grid.js"></script>
+    <script type="text/javascript" src="/lover/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="/lover/js/xadmin.js"></script>
+    <script type="text/javascript" src="/lover/js/myjs.js"></script>
+
+    <title>简答列表</title>
+</head>
+<body>
+<div class="x-body">
+    <div class="list">
+        <div class="row">
+            <div class="col-sm-4" th:each="photo:${photos}">
+                <div class="ih-item square effect6 bottom_to_top" style="margin-top: 10px">
+                    <a href="#">
+                        <div class="img">
+                            <img th:src="${photo.src}" alt="img"></img>
+                        </div>
+                        <div class="info">
+                            <h3 th:text="${photo.title}"></h3>
+                            <p th:text="${photo.intro}"></p>
+                            <p>
+                                <span style="margin:0px 5px" th:onclick="'javascript:edit(\''+${photo.pid}+'\')'">修改</span>
+                                <span style="margin:0px 5px" th:onclick="'javascript:del(\''+${photo.pid}+'\')'">删除</span>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="page" style="margin-top: 20px">
+        <ul>
+            <li class="border_3">共<span th:text="${photoNum}"></span>条</li>
+            <li class="border_3">共<span th:text="${pageNum}"></span>页</li>
+            <li class="border_3"><a th:href="@{'/v/host/gallery/' + ${type} + '/0'}">首页</a></li>
+            <div th:each="i : ${pageList}" style="display: inline">
+                <li th:if="${page} != ${i}" class="border_3">
+                    <a th:href="@{'/v/host/gallery/'+${type} + '/' + ${i}}" th:text="${i}+1"></a>
+                </li>
+                <li th:if="${page} == ${i}" class="border_3 active">
+                    <a th:href="@{'/v/host/gallery/'+${type} + '/' + ${i}}" th:text="${i}+1"></a>
+                </li>
+            </div>
+            <li class="border_4"><a th:href="@{'/v/host/gallery/'+${type} + '/' + ${pageNum-1}}">末页</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<script th:inline="javascript">
+    function del(id) {
+        swal({
+            title:  "确定删除吗？",
+            text: "您将删除该图片",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+            if (willDelete) {
+                delAns(id);
+            }
+        });
+    }
+
+    function delAns(id) {
+        var data = new Object();
+        var sendurl = [[${delURL}]];
+        data['pid'] = id;
+        var res = requestSend(sendurl, data);
+        if (loadResult(res.feedback, res.msg)) {
+            location.reload();
+        }
+    }
+
+    function edit(id) {
+        x_admin_show('编辑', '../galleryEdit/' + id);
+    }
+
+
+</script>
+</body>
+</html>

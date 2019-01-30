@@ -37,7 +37,37 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
         <property name="characterEncoding"  value="UTF-8" />
     </bean>
 
+    <bean id = "multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize">
+            <value>10485760</value>
+        </property>
+        <property name="defaultEncoding">
+            <value>UTF-8</value>
+        </property>
+    </bean>
+
     <mvc:annotation-driven />
+    <!--拦截器配置-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--对以下URL路径进行拦截-->
+            <mvc:mapping path="/v/host/**"/>
+            <bean id="interceptor" class="com.lover.interceptor.HostIntercept"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/v/manager/**"/>
+            <!-- exclude-mapping 表示该路径不拦截 -->
+            <mvc:exclude-mapping path="/v/manager/login"/>
+            <bean id="authInterceptor" class="com.lover.interceptor.AuthentIntercept"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/api/manger/**"/>
+            <mvc:exclude-mapping path="/api/manager/login"/>
+            <bean id="apiInterceptor" class="com.lover.interceptor.APIIntercept"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
     <mvc:resources mapping="/js/**" location="classpath:static/js/"/>
     <mvc:resources mapping="/css/**" location="classpath:static/css/"/>
     <mvc:resources mapping="/image/**" location="classpath:static/image/"/>

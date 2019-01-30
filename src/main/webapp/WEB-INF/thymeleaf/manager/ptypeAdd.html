@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Title</title>
+    <link rel="stylesheet" href="/lover/font/iconfont.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/lib/layui/css/layui.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/manager.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/bootstrap.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/sweet-alert.css" type="text/css"></link>
+
+    <script type="text/javascript" src="/lover/js/jquery.js"></script>
+    <script type="text/javascript" src="/lover/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/lover/js/xadmin.js"></script>
+    <script type="text/javascript" src="/lover/js/myjs.js"></script>
+    <script type="text/javascript" src="/lover/js/sweetalert.min.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="x-body">
+    <div class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="x-red">*</span>名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="name" name="name" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input"></input>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn" lay-submit="" id="submit" lay-filter="add">添加</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/lover/js/wangEditor.js"></script>
+<script th:inline="javascript">
+    $(document).ready(function () {
+        $("#submit").click(function () {
+            var name = $("#name").val();
+            if(name.length == 0 ){
+                alerterror("请输入正确信息");
+                return;
+            }
+
+            var data = new Object();
+            data['name'] = encodeURI(name);
+            var sendurl = [[${url}]];
+            var res = requestSend(sendurl, data);
+            if(loadResult(res.feedback, res.msg)){
+                swal({
+                    title:  "提示",
+                    text: "添加成功",
+                    icon: "success",
+                }).then((willDelete) => {
+                    var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+                window.parent.location.reload();
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+            });
+            }
+        })
+    })
+
+</script>
+</body>
+</html>

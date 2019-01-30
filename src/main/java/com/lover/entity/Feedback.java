@@ -3,9 +3,8 @@ package com.lover.entity;
 public enum Feedback {
     FEEDBACK_SUCCESS(10000, "请求成功"),
     FEEDBACK_USER_NO_EXIT(10001, "用户不存在"),
-    FEEDBACK_PASS_ERROR(10002, "密码错误")
-//    FEEDBACK
-    ,
+    FEEDBACK_PASS_ERROR(10002, "密码错误"),
+    FEEDBACK_WITHOUT_LOGIN(10003, "未登录"),
     ;
 
     private int feedback;

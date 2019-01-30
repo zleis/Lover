@@ -14,6 +14,10 @@
         <result column="type" property="type" />
         <result column="src" property="src" />
     </resultMap>
+
+    <sql id="photoCol">
+        pid, title, intro, des, place, ctime, type, src
+    </sql>
     
     <select id="photoList" resultMap="photoMap">
         SELECT * FROM photo order by ctime limit
@@ -36,4 +40,20 @@
     <select id="photoFind" resultMap="photoMap">
         select * from photo where pid = #{pid, jdbcType = VARCHAR}
     </select>
+
+    <insert id="photoAdd" parameterType="com.lover.entity.Photo">
+        insert into photo (<include refid="photoCol"/>) value (#{pid, jdbcType = VARCHAR}, #{title, jdbcType = VARCHAR},
+        #{intro, jdbcType = VARCHAR}, #{des, jdbcType = VARCHAR}, #{place, jdbcType = VARCHAR}, #{ctime, jdbcType = TIMESTAMP},
+        #{type, jdbcType = INTEGER}, #{src, jdbcType = VARCHAR})
+    </insert>
+
+    <update id="photoEdit" parameterType="com.lover.entity.Photo">
+        update photo set title = #{title, jdbcType = VARCHAR},intro = #{intro, jdbcType = VARCHAR},
+        des = #{des, jdbcType = VARCHAR}, place = #{place, jdbcType = VARCHAR},  type = #{type, jdbcType = INTEGER},
+        src = #{src, jdbcType = VARCHAR} where pid = #{pid, jdbcType = VARCHAR}
+    </update>
+
+    <delete id="photoDel" parameterType="com.lover.entity.Photo">
+        delete from photo where pid = #{pid, jdbcType = VARCHAR}
+    </delete>
 </mapper>

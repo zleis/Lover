@@ -1,5 +1,6 @@
 package com.lover.service;
 
+import com.lover.entity.Answer;
 import com.lover.entity.Manager;
 import com.lover.entity.Result;
 
@@ -17,5 +18,11 @@ public interface ManagerService {
      */
     public Result login(Manager manager);
 
+    /**
+     * @Method infoEdit
+     * @Date 2019/1/27
+     * @TODO 用户个人信息更新
+     */
+    public Result infoEdit(String mid, String oldpass, String newpass);
 
 }

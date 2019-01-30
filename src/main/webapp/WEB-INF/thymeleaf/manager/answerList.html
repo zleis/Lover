@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"></meta>
+    <link rel="stylesheet" href="/lover/font/iconfont.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/lib/layui/css/layui.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/manager.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/base.css"  type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/bootstrap.css"  type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/sweet-alert.css" type="text/css"></link>
+
+    <script type="text/javascript" src="/lover/js/jquery.js"></script>
+    <script type="text/javascript" src="/lover/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/lover/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="/lover/js/xadmin.js"></script>
+    <script type="text/javascript" src="/lover/js/myjs.js"></script>
+    <title>简答列表</title>
+</head>
+<body>
+<div class="x-body">
+    <div class="list">
+        <ul>
+            <li th:each="answer:${answers}">
+                <img src="/lover/image/list_con_ico.png"></img>
+                <span style="float: none">[简答]</span>
+                <a href="#" th:text="${answer.ques}"></a>
+                <span th:text="${#dates.format(answer.ctime, 'yyyy-MM-dd')}"></span>
+                <span>
+                    <a href="#" th:onclick="'javascript:edit(\''+${answer.aid}+'\')'" class="oper">修改</a>
+                    <a href="#" th:onclick="'javascript:del(\''+${answer.aid}+'\')'" class="oper">删除</a>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="page">
+        <ul>
+            <li class="border_3">共<span th:text="${ansNumber}"></span>条</li>
+            <li class="border_3">共<span th:text="${ansPageNumber}"></span>页</li>
+            <li class="border_3"><a th:href="@{'/v/manager/answerList/0'}">首页</a></li>
+            <div th:each="i : ${pageList}" style="display: inline">
+                <li th:if="${page} != ${i}" class="border_3">
+                    <a th:href="@{'/v/manager/answerList/'+${i}}" th:text="${i}+1"></a>
+                </li>
+                <li th:if="${page} == ${i}" class="border_3 active">
+                    <a th:href="@{'/v/manager/answerList/'+${i}}" th:text="${i}+1"></a>
+                </li>
+            </div>
+            <li class="border_3"><a th:href="@{'/v/manager/answerList/' + ${ansPageNumber-1}}">末页</a></li>
+        </ul>
+    </div>
+
+</div>
+<script th:inline="javascript">
+    function del(id) {
+        swal({
+            title:  "确定删除吗？",
+            text: "您将删除该简答",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+            if (willDelete) {
+                delAns(id);
+            }
+        });
+    }
+
+    function delAns(id) {
+        var data = new Object();
+        var sendurl = [[${delUrl}]];
+        data['aid'] = id;
+        var res = requestSend(sendurl, data);
+        if (loadResult(res.feedback, res.msg)) {
+            location.reload();
+        }
+    }
+
+    function edit(id) {
+        x_admin_show('编辑', '../answerEdit/' + id);
+    }
+
+
+</script>
+</body>
+</html>

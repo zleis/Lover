@@ -1,5 +1,6 @@
 package com.lover.entity;
 
+import java.net.URLDecoder;
 import java.util.Date;
 
 /**
@@ -16,6 +17,7 @@ public class Memory {
     private String title;   // 题目
     private String intro;   // 简介
     private String content; // 内容
+    private MType mtype;
 
     public Memory() {
     }
@@ -84,18 +86,52 @@ public class Memory {
         this.content = content;
     }
 
+    public MType getMtype() {
+        return mtype;
+    }
+
+    public void setMtype(MType mtype) {
+        this.mtype = mtype;
+    }
+
+    /**
+     * @Method init
+     * @Date 2019/1/26
+     * @TODO 初始化
+     */
+    public void init(){
+        this.mid = String.valueOf(System.currentTimeMillis()/1000);
+        this.ctime = new Date();
+        this.rtime = 0;
+    }
+
+    /**
+     * @Method format
+     * @Date 2019/1/26
+     * @TODO 格式初始化
+     */
+    public void format(){
+        try{
+            this.title = URLDecoder.decode(this.title,"UTF-8");
+            this.intro = URLDecoder.decode(this.intro, "UTF-8");
+            this.content = URLDecoder.decode(this.content, "UTF-8");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public String toString() {
         return "Memory{" +
                 "mid='" + mid + '\'' +
-                ", manager=" + manager.toString() +
+//                ", manager=" + manager.toString() +
                 ", ctime=" + ctime +
                 ", rtime=" + rtime +
                 ", type=" + type +
                 ", title='" + title + '\'' +
                 ", intro='" + intro + '\'' +
                 ", content='" + content + '\'' +
+//                ", mtype=" + mtype.toString()+'\''+
                 '}';
     }
 }

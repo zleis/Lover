@@ -8,7 +8,7 @@
         <!-- result用来配置 普通字段与类的属性的映射关系 ,column指定的是表的字段名； property指定的是类的属性名-->
         <result column="ctime" property="ctime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
         <result column="content" property="content"/>
-        <result column="reply" property="reply" />
+        <result column="intro" property="intro" />
         <association property="manager" javaType="com.lover.entity.Manager">
             <id column="maid" property="mid"/>
             <result column="name" property="name"/>
@@ -17,9 +17,14 @@
     </resultMap>
     
     <sql id="messageListSQL">
-        me.mid as mid, me.ctime as ctime, me.content as content, me.reply as reply,
+        me.mid as mid, me.ctime as ctime, me.content as content, me.intro as intro,
         ma.mid as maid, ma.name as name, ma.photo as photo
     </sql>
+
+    <sql id="messageSQL">
+        mid, uid, ctime, intro, content
+    </sql>
+
     <select id="messageList" resultMap="messageMap" parameterType="java.util.HashMap">
         SELECT  <include refid="messageListSQL"/> FROM msg as me, manager as ma where me.uid = ma.mid
         limit #{start, jdbcType=INTEGER}, #{length, jdbcType=INTEGER}
@@ -28,5 +33,14 @@
     <select id="messageNum" resultType="Integer">
         SELECT count(*) from msg
     </select>
+
+    <insert id="messageAdd" parameterType="com.lover.entity.Message">
+        insert into msg (<include refid="messageSQL"/>) value (#{mid, jdbcType = VARCHAR}, #{manager.mid, jdbcType = VARCHAR},
+        #{ctime, jdbcType = TIMESTAMP}, #{intro, jdbcType = VARCHAR}, #{content, jdbcType = VARCHAR})
+    </insert>
+
+    <delete id="messageDel" parameterType="String">
+        delete from msg where mid = #{mid, jdbcType = VARCHAR}
+    </delete>
 
 </mapper>

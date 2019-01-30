@@ -1,6 +1,7 @@
 package com.lover.dao;
 
 import com.lover.entity.Answer;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,4 +36,32 @@ public interface AnswerDao {
      * @TODO 通过简答ID获取简答
      */
     public Answer answerFind(HashMap hashMap);
+
+    /**
+     * @Method answerAdd
+     * @Date 2019/1/20
+     * @TODO 添加简答
+     */
+    public void answerAdd(Answer answer);
+
+    /**
+     * @Method answerRead
+     * @Date 2019/1/20
+     * @TODO 阅读次数自增
+     */
+    public void answerRead(@Param("aid") String aid);
+
+    /**
+     * @Method answerDel
+     * @Date 2019/1/24
+     * @TODO 简答删除
+     */
+    public void answerDel(@Param("aid")String aid);
+
+    /**
+     * @Method answerEdit
+     * @Date 2019/1/24
+     * @TODO 修改简答
+     */
+    public void answerEdit(Answer answer);
 }

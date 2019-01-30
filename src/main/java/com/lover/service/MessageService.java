@@ -1,6 +1,7 @@
 package com.lover.service;
 
 import com.lover.entity.Message;
+import com.lover.entity.Result;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,8 +25,13 @@ public interface MessageService {
 
     /**
      * @Todo 添加一条留言
-     * @param uid 用户ID
-     * @param msg 用户消息
      */
-    public void messageAdd(String uid, String msg);
+    public Result messageAdd(Message message);
+
+    /**
+     * @Method messageDel
+     * @Date 2019/1/27
+     * @TODO 删除消息
+     */
+    public Result messageDel(Message message);
 }

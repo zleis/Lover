@@ -59,7 +59,7 @@ public class HostController{
      * @return 简答页面
      */
     @RequestMapping(value = "/answer/{page}" ,method = RequestMethod.GET)
-    public ModelAndView answer(@PathVariable int page){
+    public ModelAndView answer(@PathVariable(value = "page")int page){
         logger.info("/answer");
         ModelAndView mv = new ModelAndView("host/answer");
 
@@ -78,12 +78,10 @@ public class HostController{
     }
 
     @RequestMapping(value = "/answerItem/{aid}", method = RequestMethod.GET)
-    public ModelAndView answerItem(@PathVariable String aid){
-        logger.info("/answerItem");
+    public ModelAndView answerItem(@PathVariable(value = "aid") String aid){
+        logger.info("/answerItem/" + aid);
         ModelAndView mv = new ModelAndView("host/answerItem");
-        logger.info(aid);
         Answer answer = answerService.answerFind(aid);
-        logger.info(answer.toString());
         mv.addObject("answer",answer);
         mv.addObject("menu", hostService.getMenuList());
 
@@ -97,7 +95,7 @@ public class HostController{
      * @Todo 回忆录记录
      */
     @RequestMapping(value = "/memoirs/{type}/{page}", method = RequestMethod.GET)
-    public ModelAndView memoirs(@PathVariable int type, @PathVariable int page){
+    public ModelAndView memoirs(@PathVariable(value = "type") int type, @PathVariable(value = "page") int page){
         logger.info("/memoirs");
         ModelAndView mv = new ModelAndView("host/memoirs");
 
@@ -117,11 +115,10 @@ public class HostController{
     }
 
     @RequestMapping(value = "/memories/{code}", method = RequestMethod.GET)
-    public ModelAndView memoryItem(@PathVariable String code){
+    public ModelAndView memoryItem(@PathVariable(value = "code") String code){
         logger.info("/memories/" + code);
         ModelAndView mv = new ModelAndView("host/memoryItem");
         Memory memory = memoryService.memoryFind(code);
-        logger.info(memory.toString());
         mv.addObject("memory", memory);
         mv.addObject("menu", hostService.getMenuList());
         return mv;
@@ -130,8 +127,8 @@ public class HostController{
 
     /** ------------------- 照片墙 ----------------------*/
     @RequestMapping(value = "/gallery/{type}/{page}", method = RequestMethod.GET)
-    public ModelAndView gallery(@PathVariable int type, @PathVariable int page){
-        logger.info("/gallery");
+    public ModelAndView gallery(@PathVariable(value = "type") int type, @PathVariable(value = "page") int page){
+        logger.info("/gallery/" + type + "/" + page);
         ModelAndView mv = new ModelAndView("host/gallery");
 
         int photoNum = galleryService.photoNumber(type);
@@ -148,7 +145,7 @@ public class HostController{
         return mv;
     }
     @RequestMapping(value = "/galleryItem/{code}", method = RequestMethod.GET)
-    public ModelAndView galleryItem(@PathVariable String code){
+    public ModelAndView galleryItem(@PathVariable(value = "code") String code){
         logger.info("/galleryItem/" + code);
         ModelAndView mv = new ModelAndView("host/galleryItem");
 
@@ -159,7 +156,7 @@ public class HostController{
 
     /** ------------------------ 留言板 -------------------------------- */
     @RequestMapping(value = "/message/{page}")
-    public ModelAndView messageList(@PathVariable int page){
+    public ModelAndView messageList(@PathVariable(value = "page") int page){
         logger.info("/message/" + page);
         ModelAndView mv = new ModelAndView("host/message");
         int msgNumber = messageService.messageNum();
@@ -182,7 +179,6 @@ public class HostController{
         }
         return pageList;
     }
-
 
 
 }

@@ -68,7 +68,7 @@
                     <span th:text = "${memory.rtime}"></span>
                 </div>
                 <hr></hr>
-                <div th:text="${memory.content}" class="answer">
+                <div class="answer" id = "content">
 
                 </div>
 
@@ -90,7 +90,11 @@
         </div>
     </div>
 </div>
-
+<script th:inline="javascript">
+    $(document).ready(function () {
+       $("#content").append([[${memory.content}]]);
+    });
+</script>
 </body>
 
 </html>

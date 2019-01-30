@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Title</title>
+    <link rel="stylesheet" href="/lover/font/iconfont.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/lib/layui/css/layui.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/manager.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/bootstrap.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/sweet-alert.css" type="text/css"></link>
+
+    <script type="text/javascript" src="/lover/js/jquery.js"></script>
+    <script type="text/javascript" src="/lover/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/lover/js/xadmin.js"></script>
+    <script type="text/javascript" src="/lover/js/myjs.js"></script>
+    <script type="text/javascript" src="/lover/js/sweetalert.min.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="x-body">
+    <div class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <label for="oldPass" class="layui-form-label">
+                <span class="x-red">*</span>旧密码
+            </label>
+            <div class="layui-input-inline">
+                <input type="password" id="oldPass" name="ques" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input"></input>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="newPass" class="layui-form-label">
+                <span class="x-red">*</span>新密码
+            </label>
+            <div class="layui-input-inline">
+                <input type="password" id="newPass" name="ques" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input"></input>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="reNewPass" class="layui-form-label">
+                <span class="x-red">*</span>确认新密码
+            </label>
+            <div class="layui-input-inline">
+                <input type="password" id="reNewPass" name="ques" required="" lay-verify="required" autocomplete="off"
+                       class="layui-input"></input>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <button class="layui-btn" lay-submit="" id="submit" lay-filter="add">修改</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/lover/js/wangEditor.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(document).ready(function () {
+        $("#submit").click(function () {
+            var oldpass = $("#oldPass").val();
+            var newpass = $("#newPass").val();
+            var renewpass = $("#reNewPass").val();
+
+            if(newpass != renewpass){
+                alerterror("两次密码不一致");
+                return;
+            }
+
+            if(newpass.length < 6){
+                alerterror("密码长度不能短于6");
+                return;
+            }
+
+            var data = new Object();
+            data['oldpass'] = oldpass;
+            data['newpass'] = newpass;
+            var sendurl = [[${url}]];
+            var res = requestSend(sendurl, data);
+            if(loadResult(res.feedback, res.msg)){
+                swal({
+                    title:  "提示",
+                    text: "修改成功",
+                    icon: "success",
+                }).then((willDelete) => {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                });
+
+            }
+        })
+    })
+    /*]]>*/
+
+</script>
+</body>
+</html>

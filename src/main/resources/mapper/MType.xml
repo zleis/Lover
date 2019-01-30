@@ -14,4 +14,20 @@
         SELECT * FROM mtype order by mid
     </select>
 
+    <select id="mtypeFind" parameterType="Integer" resultMap="mTypeMap">
+        select * from mtype where mid = #{mid, jdbcType = INTEGER}
+    </select>
+
+    <insert id="mtypeAdd" parameterType="com.lover.entity.MType">
+        INSERT INTO mtype (name, ctime) value (#{name, jdbcType = VARCHAR}, #{ctime, jdbcType = TIMESTAMP})
+    </insert>
+    
+    <delete id="mtypeDel" parameterType="com.lover.entity.MType">
+        delete from mtype where mid = #{mid, jdbcType = INTEGER}
+    </delete>
+    
+    <update id="mtypeEdit" parameterType="com.lover.entity.MType">
+        update mtype set name = #{name, jdbcType = VARCHAR} where mid = #{mid, jdbcType = INTEGER}
+    </update>
+
 </mapper>

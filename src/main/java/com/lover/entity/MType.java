@@ -1,6 +1,7 @@
 package com.lover.entity;
 
 
+import java.net.URLDecoder;
 import java.util.Date;
 
 /**
@@ -47,6 +48,18 @@ public class MType {
 
     public void setCtime(Date ctime) {
         this.ctime = ctime;
+    }
+
+    public void init(){
+        this.ctime = new Date();
+    }
+
+    public void format(){
+        try{
+            this.name = URLDecoder.decode(this.name,"UTF-8");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

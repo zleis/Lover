@@ -1,0 +1,91 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"></meta>
+    <meta name="renderer" content="webkit"></meta>
+    <!--国产浏览器高速模式-->
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+    <link href="/lover/image/favicon.ico" rel="icon" type="image/x-icon"></link>
+    <link rel="stylesheet" href="/lover/font/iconfont.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/lib/layui/css/layui.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/manager.css" type="text/css"></link>
+
+    <script type="text/javascript" src="/lover/js/jquery.js"></script>
+    <script type="text/javascript" src="/lover/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/lover/js/xadmin.js"></script>
+    <script type="text/javascript" src="/lover/js/myjs.js"></script>
+    <title>管理</title>
+</head>
+<body>
+<!-- 顶部开始 -->
+<div class="container">
+    <div class="logo"><a href="./index.php">Lover</a></div>
+    <div class="left_open">
+        <i title="展开左侧栏" class="iconfont">&#xe6e8;</i>
+    </div>
+    <ul class="layui-nav right" lay-filter="">
+        <li class="layui-nav-item">
+            <a href="javascript:;" th:text = "${name}"></a>
+            <dl class="layui-nav-child">
+                <dd><a href="#" id = "userInfo">修改密码</a></dd>
+                <dd><a href="#" id = "userLogout">退出</a></dd>
+            </dl>
+        </li>
+    </ul>
+</div>
+<div class="left-nav">
+    <div id="side-nav">
+        <ul id = "nav">
+            <li th:each="item : ${menu}">
+                <a href="javascript:;">
+                    <i><span class="icon iconfont " th:attrappend="class=${item.icon}"></span></i>
+                    <cite th:text="${item.name}"></cite>
+                    <i class="iconfont nav_right">&#xe603;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li th:each="subitem : ${item.child}">
+                        <a th:attrappend="_href=${subitem.url}">
+                            <i class="iconfont">&#xe602;</i>
+                            <cite th:text="${subitem.name}">1</cite>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="page-content">
+    <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+        <ul class="layui-tab-title">
+            <li>Welcome</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <iframe src='welcome.php' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-content-bg"></div>
+<div class="footer">
+    <div class="copyright">Lover</div>
+</div>
+<!-- 底部结束 -->
+<script th:inline="javascript">
+    $(document).ready(function () {
+        $("#userLogout").click(function () {
+            var obj = new Object();
+            var sendurl = [[${logoutURL}]];
+            requestSend(sendurl,obj);
+            window.location.reload();
+        });
+
+        $("#userInfo").click(function () {
+            x_admin_show("修改","../manager/infoEdit");
+        })
+    });
+</script>
+</body>
+</html>

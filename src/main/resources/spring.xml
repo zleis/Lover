@@ -16,5 +16,5 @@
 
     <import resource="spring-mvc.xml" />
     <import resource="spring-dao.xml" />
-
+    <import resource="spring-redis.xml" />
 </beans>

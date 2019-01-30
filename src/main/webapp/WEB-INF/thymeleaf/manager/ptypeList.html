@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"></meta>
+    <link rel="stylesheet" href="/lover/font/iconfont.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/lib/layui/css/layui.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/manager.css" type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/base.css"  type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/bootstrap.css"  type="text/css"></link>
+    <link rel="stylesheet" href="/lover/css/sweet-alert.css" type="text/css"></link>
+
+    <script type="text/javascript" src="/lover/js/jquery.js"></script>
+    <script type="text/javascript" src="/lover/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/lover/js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="/lover/js/xadmin.js"></script>
+    <script type="text/javascript" src="/lover/js/myjs.js"></script>
+    <title>照片类别列表</title>
+</head>
+<body>
+<div class="x-body">
+    <div class="list">
+
+        <button class="layui-btn" onclick="add()">添加</button>
+        <hr></hr>
+        <table class="layui-table" style="text-align: center;">
+            <thead >
+            <th style="text-align: center;">名称</th>
+            <th style="text-align: center;">创建时间</th>
+            <th style="text-align: center;">操作</th>
+            </thead>
+            <tbody>
+            <tr th:each = "ptype:${ptypes}">
+                <td th:text="${ptype.name}"></td>
+                <td th:text="${#dates.format(ptype.ctime, 'yyyy-MM-dd')}"></td>
+                <td>
+                    <a href="#" th:onclick="'javascript:edit(\''+${ptype.pid}+'\')'" class="oper">修改</a>
+                    <a href="#" th:onclick="'javascript:del(\''+${ptype.pid}+'\')'" class="oper">删除</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+<script th:inline="javascript">
+    function del(id) {
+        swal({
+            title:  "确定删除吗？",
+            text: "您将删除该类别",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                delMemory(id);
+            }
+        });
+    }
+
+    function delMemory(id) {
+        var data = new Object();
+        var sendurl = [[${delURL}]];
+        data['pid'] = id;
+        var res = requestSend(sendurl, data);
+        if (loadResult(res.feedback,res.msg)) {
+            location.reload();
+        }
+    }
+
+    function edit(id) {
+        x_admin_show('编辑', './ptypeEdit/' + id);
+    }
+
+    function add(){
+        x_admin_show("编辑", './ptypeAdd');
+    }
+
+
+</script>
+</body>
+</html>

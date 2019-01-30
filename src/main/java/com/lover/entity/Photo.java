@@ -1,9 +1,10 @@
 package com.lover.entity;
 
+import java.net.URLDecoder;
 import java.util.Date;
 
 public class Photo {
-    private int pid;    // 照片ID
+    private String pid;    // 照片ID
     private String title;   // 照片名称
     private String intro;   // 照片简介
     private String des;     // 照片描述
@@ -11,11 +12,12 @@ public class Photo {
     private Date ctime;     // 照片上传时间
     private int type;       // 照片类别
     private String src;     // 路径
+    private PType pType;    // 类别
 
     public Photo() {
     }
 
-    public Photo(int pid, String title, String intro, String des, String place, Date ctime, int type, String src) {
+    public Photo(String pid, String title, String intro, String des, String place, Date ctime, int type, String src) {
         this.pid = pid;
         this.title = title;
         this.intro = intro;
@@ -26,11 +28,11 @@ public class Photo {
         this.src = src;
     }
 
-    public int getPid() {
+    public String getPid() {
         return pid;
     }
 
-    public void setPid(int pid) {
+    public void setPid(String pid) {
         this.pid = pid;
     }
 
@@ -88,6 +90,21 @@ public class Photo {
 
     public void setSrc(String src) {
         this.src = src;
+    }
+
+    public void init(){
+        this.ctime = new Date();
+    }
+
+    public void format(){
+        try{
+            this.title = URLDecoder.decode(this.title,"UTF-8");
+            this.intro = URLDecoder.decode(this.intro, "UTF-8");
+            this.des = URLDecoder.decode(this.des,"UTF-8");
+            this.place = URLDecoder.decode(this.place, "UTF-8");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

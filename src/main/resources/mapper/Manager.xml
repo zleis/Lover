@@ -14,4 +14,8 @@
     <select id="managerFind" parameterType="String" resultMap="managerMap">
         select * from manager WHERE mid = #{mid}
     </select>
+    
+    <update id="managerEdit" parameterType="String">
+        update manager set pass = #{pass, jdbcType = VARCHAR} where mid = #{mid, jdbcType = VARCHAR}
+    </update>
 </mapper>

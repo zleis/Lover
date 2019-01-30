@@ -21,6 +21,6 @@ public interface ManagerDao {
     public Manager managerFind(@Param("mid")String mid);
 
 
-
+    public void managerEdit(@Param("mid")String mid, @Param("pass")String pass);
 
 }
