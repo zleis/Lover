@@ -73,4 +73,5 @@ http://www.springframework.org/schema/aop/spring-aop.xsd">
     <mvc:resources mapping="/image/**" location="classpath:static/image/"/>
     <mvc:resources mapping="/font/**" location="classpath:static/font/"/>
     <mvc:resources mapping="/lib/**" location="classpath:static/lib/"/>
+    <mvc:resources mapping="/music/**" location="classpath:static/music/"/>
 </beans>

@@ -31,7 +31,7 @@ public enum URLEnum {
 
     private String url;
     private String comment;
-    private static String baseURL = "http://localhost:8080/lover";
+    private static String baseURL = "http://zleitencent.cn:8001/lover";
 
     public String getUrl() {
         return baseURL + url;

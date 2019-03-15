@@ -33,8 +33,8 @@ public class Constant {
     static {
         try {
             classpath = ResourceUtils.getURL("classpath:").getPath();
-            memoryPath = classpath.substring(1, classpath.length()) + "static/image/memory/";
-            galleryPath = classpath.substring(1, classpath.length()) + "static/image/gallery/";
+            memoryPath = classpath + "static/image/memory/";
+            galleryPath = classpath + "static/image/gallery/";
             File memoryFile = new File(memoryPath);
             if(!memoryFile.exists()){
                 memoryFile.mkdir();

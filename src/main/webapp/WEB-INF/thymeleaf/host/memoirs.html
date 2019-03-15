@@ -86,7 +86,7 @@
                             <img src="/lover/image/hth.gif"></img>
                             <p class="title"><a href="content.html" th:text="${memory.title}"></a></p>
                             <p class="time">时间：<span th:text="${#dates.format(memory.ctime, 'yyyy-MM-dd')}"></span></p>
-                            <p class="con">简介<span th:text = "${memory.intro}"></span><a th:href="@{'/v/host/memories/' + ${memory.mid}}">【查看全文】</a></p>
+                            <p class="con">简介：<span th:text = "${memory.intro}"></span><a th:href="@{'/v/host/memories/' + ${memory.mid}}">【查看全文】</a></p>
                         </li>
                         <!--<li>-->
                             <!--<img src="/lover/image/hth.gif"></img>-->

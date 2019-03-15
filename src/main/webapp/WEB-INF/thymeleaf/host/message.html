@@ -68,7 +68,7 @@
                                 <div class="userPic"><img th:src="${msg.manager.photo}"></img> </div>
                                 <div class="msgcontent">
                                     <div class="userName"><a href="#" th:text="${msg.manager.name}"></a></div>
-                                    <div class="msgInfo" th:text = "${msg.content}"></div>
+                                    <div class="msgInfo" th:utext = "${msg.content}"></div>
                                     <div class="times"><span th:text = "${#dates.format(msg.ctime, 'yyyy-MM-dd hh:mm:ss')}"></span></div>
                                 </div>
                             </li>
@@ -88,7 +88,7 @@
                                 <a th:href="@{'/v/host/message/'+${i}}" th:text="${i}+1"></a>
                             </li>
                         </div>
-                        <li class="border_3"><a th:href="@{'/v/host/message/' + ${pageNum-1}}">末页</a></li>
+                        <li class="border_4"><a th:href="@{'/v/host/message/' + ${pageNum-1}}">末页</a></li>
                     </ul>
                 </div>
             </div>
